@@ -1,4 +1,4 @@
-package com.landy.singleton;
+package org.landy.singleton;
 
 /**
  * Created by Landy on 2018/5/12.
