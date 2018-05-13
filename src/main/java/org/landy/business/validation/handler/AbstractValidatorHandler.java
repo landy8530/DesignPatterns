@@ -49,6 +49,19 @@ public abstract class AbstractValidatorHandler implements ApplicationListener<Co
         fileDetailValidatorChain.addValidator(validatorInstance,getWorkflowId());
     }
 
+    protected abstract WorkflowEnum getWorkflowId();
+    /**
+     * the package need to be added the validators
+     * @return
+     */
+    protected abstract Set<String> getBasePackages();
+
+    /**
+     * the classes need to be excluded
+     * @return
+     */
+    protected abstract Set<Class> excludeClasses();
+
     private void addValidators() {
         List<Class<? extends Validator>> validators = getValidators();
 
@@ -64,19 +77,6 @@ public abstract class AbstractValidatorHandler implements ApplicationListener<Co
 
         });
     }
-
-    protected abstract WorkflowEnum getWorkflowId();
-    /**
-     * the package need to be added the validators
-     * @return
-     */
-    protected abstract Set<String> getBasePackages();
-
-    /**
-     * the classes need to be excluded
-     * @return
-     */
-    protected abstract Set<Class> excludeClasses();
 
     private List<Class<? extends Validator>> getValidators() {
         Set<String> packageNames = this.getBasePackages();
