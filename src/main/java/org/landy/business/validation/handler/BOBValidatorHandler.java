@@ -21,8 +21,8 @@ public class BOBValidatorHandler extends AbstractValidatorHandler {
     @Override
     protected Set<String> getBasePackages() {
         Set<String> packages = new HashSet<>();
-        packages.add("com.ehi.csync.request.validation.detail.bob");
-        packages.add("com.ehi.csync.request.validation.detail.common");
+        packages.add("org.landy.business.validation.detail.bob");
+        packages.add("org.landy.business.validation.detail.common");
         return packages;
     }
 
