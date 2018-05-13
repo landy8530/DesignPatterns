@@ -1,7 +1,7 @@
 package org.landy.utils;
 
 import org.apache.commons.io.IOUtils;
-import org.landy.constants.Constants;
+import org.landy.business.constants.Constants;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 

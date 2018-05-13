@@ -5,7 +5,7 @@ import org.landy.business.domain.file.RequestFile;
 import org.landy.business.enums.WorkflowEnum;
 import org.landy.business.validation.Validator;
 import org.landy.business.validation.ValidatorChain;
-import org.landy.constants.Constants;
+import org.landy.business.constants.Constants;
 import org.landy.exception.BusinessValidationException;
 import org.springframework.stereotype.Component;
 

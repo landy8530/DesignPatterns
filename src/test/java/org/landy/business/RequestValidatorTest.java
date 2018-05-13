@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.landy.business.domain.file.BOBRequestFile;
 import org.landy.business.domain.file.PolicyRequestFile;
 import org.landy.business.domain.file.RequestFile;
-import org.landy.constants.Constants;
+import org.landy.business.constants.Constants;
 import org.landy.test.SpringTestBase;
 import org.landy.utils.AssertUtil;
 import org.landy.utils.FileUtil;
@@ -27,8 +27,8 @@ public class RequestValidatorTest extends SpringTestBase {
     @Test
     public void testValidation() throws IOException {
         String filePath = FileUtil.getFilePathByClassPath("/org/landy/business");
-//        String fileName = "csync_bob_integration_20180511_102637_324.txt";
-        String fileName = "csync_policy_20180510_101705_2.txt";
+        String fileName = "csync_bob_integration_20180513_102637_324.txt";
+//        String fileName = "csync_policy_20180510_101705_2.txt";
         RequestFile requestFile;
         if (fileName.startsWith("csync_policy_")) {
             requestFile = new PolicyRequestFile();
@@ -38,12 +38,10 @@ public class RequestValidatorTest extends SpringTestBase {
 
         requestFile.setFileName(fileName);
 
-
         String validationResult;
-
+        //校验文件头
         validationResult = requestValidator.validateFileInfo(requestFile);
         AssertUtil.assertTrue(Constants.VALID.equals(validationResult), validationResult);
-
 
         File archiveFile = new File(filePath + File.separator + fileName);
 
@@ -51,15 +49,18 @@ public class RequestValidatorTest extends SpringTestBase {
 
         List<String> textLines = FileUtils.readLines(archiveFile, Constants.ENCODING_UTF8);
         requestFile.setTextLines(textLines);
-
+        System.out.println("校验文件前，文件明细行数为:" + requestFile.getDetailLines().size());
+        //校验文件里的概要信息
         validationResult = requestValidator.validateSummary(requestFile);
         AssertUtil.assertTrue(Constants.VALID.equals(validationResult), validationResult);
-
+        //校验文件中的列名
         validationResult = requestValidator.validateHeaders(requestFile);
         AssertUtil.assertTrue(Constants.VALID.equals(validationResult), validationResult);
-
+        //校验文件明细
         validationResult = requestValidator.validateDetails(requestFile);
         AssertUtil.assertTrue(Constants.VALID.equals(validationResult), validationResult);
+
+        System.out.println("校验文件后，文件明细数目为:" + requestFile.getRequestDetails().size());
 
     }
 

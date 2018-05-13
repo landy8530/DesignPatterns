@@ -1,9 +1,8 @@
 package org.landy.business.domain.file;
 
-import org.apache.commons.lang.StringUtils;
 import org.landy.business.domain.detail.BOBRequestDetail;
 import org.landy.business.enums.WorkflowEnum;
-import org.landy.constants.Constants;
+import org.landy.business.constants.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,48 +25,6 @@ public class BOBRequestFile extends RequestFile<BOBRequestDetail> {
 
     private List<BOBRequestDetail> requestBOBDetails;
 
-    //FSIS-2993
-    private void setNonGMGValues(BOBRequestDetail detail) {
-        String systemSourceId = detail.getSystemSourceId();
-        String systemSource = detail.getSystemSource();
-        //When the CARRIER_INTEGRATE_FLOW_ID=0 is leveraged, the following is true:
-        //INTEGRATE_PLAN should be NULL
-        if(!(StringUtils.isNotEmpty(systemSource) && StringUtils.isNotEmpty(systemSourceId)) || "0".equals(detail.getCarrierIntegrateFlowId())) {
-            detail.setIntegratePlan(null);
-        }
-    }
-
-    private List<BOBRequestDetail> getRequestBOBDetails() {
-        if (requestBOBDetails == null) {
-            List<String> detailLines = getDetailLines();
-
-            if (detailLines == null) return null;
-
-            BOBRequestDetail detail;
-            requestBOBDetails = new ArrayList<>();
-            for (String detailLine : detailLines) {
-                detail = parseDetailLinesToRequestBOBDetail(detailLine);
-
-                setNonGMGValues(detail); //FSIS-2993
-                //2018.04.28 address type must be upper case
-                if(StringUtils.isNotEmpty(detail.getAddressType())) {
-                    detail.setAddressType(detail.getAddressType().toUpperCase());
-                }
-
-                requestBOBDetails.add(detail);
-            }
-        }
-
-        return requestBOBDetails;
-    }
-
-    private BOBRequestDetail parseDetailLinesToRequestBOBDetail(String detailLine) {
-        BOBRequestDetail detail = new BOBRequestDetail();
-        String[] detailValues = detailLine.split(Constants.DELIMITER_PIPE);
-        parseToDetail(detail,detailValues);
-        return detail;
-    }
-
     @Override
     public List<BOBRequestDetail> getRequestDetails() {
         return getRequestBOBDetails();
@@ -81,6 +38,30 @@ public class BOBRequestFile extends RequestFile<BOBRequestDetail> {
     @Override
     public WorkflowEnum getProcessWorkFlow() {
         return WorkflowEnum.BOB;
+    }
+
+    private List<BOBRequestDetail> getRequestBOBDetails() {
+        if (requestBOBDetails == null) {
+            List<String> detailLines = getDetailLines();
+
+            if (detailLines == null) return null;
+
+            BOBRequestDetail detail;
+            requestBOBDetails = new ArrayList<>();
+            for (String detailLine : detailLines) {
+                detail = parseDetailLinesToRequestBOBDetail(detailLine);
+                requestBOBDetails.add(detail);
+            }
+        }
+
+        return requestBOBDetails;
+    }
+
+    private BOBRequestDetail parseDetailLinesToRequestBOBDetail(String detailLine) {
+        BOBRequestDetail detail = new BOBRequestDetail();
+        String[] detailValues = detailLine.split(Constants.DELIMITER_PIPE);
+        parseToDetail(detail,detailValues);
+        return detail;
     }
 
 }

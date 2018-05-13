@@ -2,7 +2,7 @@ package org.landy.business.domain.file;
 
 import org.landy.business.domain.detail.PolicyRequestDetail;
 import org.landy.business.enums.WorkflowEnum;
-import org.landy.constants.Constants;
+import org.landy.business.constants.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,60 +29,6 @@ public class PolicyRequestFile extends RequestFile<PolicyRequestDetail> {
 
     private List<PolicyRequestDetail> requestPolicyDetails;
 
-    private List<PolicyRequestDetail> getRequestPolicyDetails() {
-        if (requestPolicyDetails == null) {
-            List<String> detailLines = getDetailLines();
-            if (detailLines == null) return null;
-            PolicyRequestDetail detail;
-            requestPolicyDetails = new ArrayList<>();
-            for (String detailLine : detailLines) {
-                detail = parseDetailLinesToRequestPolicyDetail(detailLine);
-                setSmbValuesWhenIsSmb(detail);
-                requestPolicyDetails.add(detail);
-            }
-        }
-
-        return requestPolicyDetails;
-    }
-
-    private void setSmbValuesWhenIsSmb(PolicyRequestDetail detail) {
-        if(detail.getBusinessLine() != null && "1".equals(detail.getBusinessLine().trim())){
-            if(detail.getPolicyId() != null && !detail.getPolicyId().isEmpty()){
-                detail.setPolicyId("-" + detail.getPolicyId());
-            }
-
-            if(detail.getCarrierId() != null && !detail.getCarrierId().isEmpty()){
-                detail.setCarrierId("-" + detail.getCarrierId());
-            }
-
-            if(detail.getPlanId() != null && !detail.getPlanId().isEmpty()){
-                detail.setPlanId("-" + detail.getPlanId());
-            }
-
-            if(detail.getRiderId() != null && !detail.getRiderId().isEmpty()){
-                detail.setRiderId("-" + detail.getRiderId());
-            }
-
-            if(detail.getApplicationId() != null && !detail.getApplicationId().isEmpty()){
-                detail.setApplicationId("-" + detail.getApplicationId());
-            }
-
-            setRafForSMBAccordingSourceData(detail);
-        }
-    }
-
-    private void setRafForSMBAccordingSourceData(PolicyRequestDetail detail) {
-        detail.setRaf(detail.getRateTier());
-        detail.setRateTier(null);
-    }
-
-    private PolicyRequestDetail parseDetailLinesToRequestPolicyDetail(String detailLine) {
-        PolicyRequestDetail detail = new PolicyRequestDetail();
-        String[] detailValues = detailLine.split(Constants.DELIMITER_PIPE);
-        parseToDetail(detail,detailValues);
-        return detail;
-    }
-
     @Override
     public List<PolicyRequestDetail> getRequestDetails() {
         return getRequestPolicyDetails();
@@ -97,4 +43,27 @@ public class PolicyRequestFile extends RequestFile<PolicyRequestDetail> {
     public WorkflowEnum getProcessWorkFlow() {
         return WorkflowEnum.POLICY;
     }
+
+    private List<PolicyRequestDetail> getRequestPolicyDetails() {
+        if (requestPolicyDetails == null) {
+            List<String> detailLines = getDetailLines();
+            if (detailLines == null) return null;
+            PolicyRequestDetail detail;
+            requestPolicyDetails = new ArrayList<>();
+            for (String detailLine : detailLines) {
+                detail = parseDetailLinesToRequestPolicyDetail(detailLine);
+                requestPolicyDetails.add(detail);
+            }
+        }
+
+        return requestPolicyDetails;
+    }
+
+    private PolicyRequestDetail parseDetailLinesToRequestPolicyDetail(String detailLine) {
+        PolicyRequestDetail detail = new PolicyRequestDetail();
+        String[] detailValues = detailLine.split(Constants.DELIMITER_PIPE);
+        parseToDetail(detail,detailValues);
+        return detail;
+    }
+
 }

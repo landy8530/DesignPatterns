@@ -1,7 +1,7 @@
 package org.landy.utils;
 
 import org.apache.commons.lang.StringUtils;
-import org.landy.constants.Constants;
+import org.landy.business.constants.Constants;
 
 public class KeyValueUtil {
 

@@ -1,4 +1,4 @@
-package org.landy.constants;
+package org.landy.business.constants;
 
 public class Constants {
 

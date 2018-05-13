@@ -1,7 +1,7 @@
 package org.landy.utils;
 
 
-import org.landy.constants.Constants;
+import org.landy.business.constants.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

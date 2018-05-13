@@ -5,7 +5,7 @@ import org.landy.business.domain.detail.PolicyRequestDetail;
 import org.landy.business.domain.file.RequestFile;
 import org.landy.business.enums.WorkflowEnum;
 import org.landy.business.validation.handler.PolicyValidatorHandler;
-import org.landy.constants.Constants;
+import org.landy.business.constants.Constants;
 import org.landy.utils.DateUtil;
 import org.landy.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
