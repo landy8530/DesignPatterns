@@ -1,11 +1,8 @@
 package org.landy.business.domain.file;
 
-import org.apache.commons.lang.StringUtils;
 import org.landy.business.domain.detail.PolicyRequestDetail;
 import org.landy.business.enums.WorkflowEnum;
 import org.landy.constants.Constants;
-import org.landy.utils.BeanUtil;
-import org.landy.utils.CamelCaseUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,19 +78,8 @@ public class PolicyRequestFile extends RequestFile<PolicyRequestDetail> {
 
     private PolicyRequestDetail parseDetailLinesToRequestPolicyDetail(String detailLine) {
         PolicyRequestDetail detail = new PolicyRequestDetail();
-
-        String propertyName;
-        String propertyValue;
-        String[] detailValues;
-        detailValues = detailLine.split(Constants.DELIMITER_PIPE);
-        for (int i = 0; i < detailValues.length; i++) {
-            propertyValue = detailValues[i];
-
-            if (StringUtils.isEmpty(propertyValue)) continue;
-
-            propertyName = CamelCaseUtil.toCamelCase(policyDetailHeaders[i]);
-            BeanUtil.setProperty(detail, propertyName, propertyValue);
-        }
+        String[] detailValues = detailLine.split(Constants.DELIMITER_PIPE);
+        parseToDetail(detail,detailValues);
         return detail;
     }
 
@@ -108,8 +94,7 @@ public class PolicyRequestFile extends RequestFile<PolicyRequestDetail> {
     }
 
     @Override
-    public int getProcessWorkFlow() {
-        processWorkFlow = WorkflowEnum.POLICY.getValue();
-        return processWorkFlow;
+    public WorkflowEnum getProcessWorkFlow() {
+        return WorkflowEnum.POLICY;
     }
 }

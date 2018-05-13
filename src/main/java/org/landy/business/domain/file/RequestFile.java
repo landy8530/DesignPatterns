@@ -2,11 +2,9 @@ package org.landy.business.domain.file;
 
 import org.apache.commons.lang.StringUtils;
 import org.landy.business.domain.detail.RequestDetail;
+import org.landy.business.enums.WorkflowEnum;
 import org.landy.constants.Constants;
-import org.landy.utils.DateUtil;
-import org.landy.utils.FileUtil;
-import org.landy.utils.KeyValueUtil;
-import org.landy.utils.StringUtil;
+import org.landy.utils.*;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -18,7 +16,6 @@ public abstract class RequestFile<T extends RequestDetail> {
     private String issueId;
     private String updateStatus;
     private Date processDate;
-    protected int processWorkFlow = -99;
 
     private List<String> textLines;
     private List<String> detailLines;
@@ -134,7 +131,21 @@ public abstract class RequestFile<T extends RequestDetail> {
 
     public abstract List<T> getRequestDetails();
 
-	public abstract int getProcessWorkFlow();
+	public abstract WorkflowEnum getProcessWorkFlow();
 
     public abstract String[] getDetailHeaders();
+
+    protected void parseToDetail(T detail,String[] detailValues) {
+        String propertyName;
+        String propertyValue;
+        for (int i = 0; i < detailValues.length; i++) {
+            propertyValue = detailValues[i];
+
+            if (StringUtils.isEmpty(propertyValue)) continue;
+
+            propertyName = CamelCaseUtil.toCamelCase(getDetailHeaders()[i]);
+            BeanUtil.setProperty(detail, propertyName, propertyValue);
+        }
+    }
+
 }

@@ -79,8 +79,8 @@ public class PolicyRequestValidation extends AbstractRequestValidation {
     }
 
     @Override
-    protected int accessUpdateWorkflowId() {
-        return WorkflowEnum.POLICY.getValue();
+    protected WorkflowEnum accessWorkflow() {
+        return WorkflowEnum.POLICY;
     }
 
     @Override

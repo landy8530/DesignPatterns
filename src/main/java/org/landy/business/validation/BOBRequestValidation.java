@@ -81,8 +81,8 @@ public class BOBRequestValidation extends AbstractRequestValidation {
     }
 
     @Override
-    protected int accessUpdateWorkflowId() {
-        return WorkflowEnum.BOB.getValue();
+    protected WorkflowEnum accessWorkflow() {
+        return WorkflowEnum.BOB;
     }
 
     @Override

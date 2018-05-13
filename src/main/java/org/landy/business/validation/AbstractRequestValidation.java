@@ -2,6 +2,7 @@ package org.landy.business.validation;
 
 import org.apache.commons.lang3.StringUtils;
 import org.landy.business.domain.file.RequestFile;
+import org.landy.business.enums.WorkflowEnum;
 import org.landy.constants.Constants;
 import org.landy.exception.BusinessValidationException;
 import org.landy.web.utils.ApplicationUtil;
@@ -19,12 +20,10 @@ public abstract class AbstractRequestValidation {
 
     protected static final Logger LOGGER = LoggerFactory.getLogger(AbstractRequestValidation.class);
 
-    private static Map<Integer,String> requestValidationHandlerMap = new HashMap<>();
-
-
+    private static Map<WorkflowEnum,String> requestValidationHandlerMap = new HashMap<>();
 
     public AbstractRequestValidation() {
-        requestValidationHandlerMap.put(this.accessUpdateWorkflowId(),this.accessBeanName());
+        requestValidationHandlerMap.put(this.accessWorkflow(),this.accessBeanName());
     }
 
     public String validateFileInfo(RequestFile file) {
@@ -75,14 +74,14 @@ public abstract class AbstractRequestValidation {
 
     /**
      * Generate a AbstractRequestValidation Object
-     * @param updateWorkflowId
+     * @param workflowId
      * @return
      */
-    public static final AbstractRequestValidation accessRequestValidationHandler(Integer updateWorkflowId) {
-        String beanName = requestValidationHandlerMap.get(updateWorkflowId);
+    public static final AbstractRequestValidation accessRequestValidationHandler(WorkflowEnum workflowId) {
+        String beanName = requestValidationHandlerMap.get(workflowId);
         if(StringUtils.isEmpty(beanName)) {
             LOGGER.error("can not find {}'s component",beanName);
-            throw new BusinessValidationException("can not find "+beanName + "'s component,current UPDATE_WORKFLOW_ID is :" + updateWorkflowId);
+            throw new BusinessValidationException("can not find "+beanName + "'s component,current UPDATE_WORKFLOW_ID is :" + workflowId.getValue());
         }
         return ApplicationUtil.getApplicationContext().getBean(beanName,AbstractRequestValidation.class);
     }
@@ -115,7 +114,7 @@ public abstract class AbstractRequestValidation {
      * return the current CSYNC_UPDATE_WORKFLOW.UPDATE_WORKFLOW_ID
      * @return
      */
-    protected abstract int accessUpdateWorkflowId();
+    protected abstract WorkflowEnum accessWorkflow();
 
     /**
      * return the current file name's format ,such as: csync_policy_yyyyMMdd_HHmmss_count.txt

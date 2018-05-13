@@ -1,6 +1,7 @@
 package org.landy.business.validation.facade;
 
 import org.landy.business.domain.file.RequestFile;
+import org.landy.business.enums.WorkflowEnum;
 import org.landy.business.validation.AbstractRequestValidation;
 import org.springframework.stereotype.Component;
 
@@ -29,8 +30,8 @@ public class RequestValidationFacade {
 
 
     private AbstractRequestValidation accessRequestValidation(RequestFile requestFile) {
-        int updateWorkflowId = requestFile.getProcessWorkFlow();
-        AbstractRequestValidation requestValidation = AbstractRequestValidation.accessRequestValidationHandler(updateWorkflowId);
+        WorkflowEnum workflowId = requestFile.getProcessWorkFlow();
+        AbstractRequestValidation requestValidation = AbstractRequestValidation.accessRequestValidationHandler(workflowId);
         return requestValidation;
     }
 }
