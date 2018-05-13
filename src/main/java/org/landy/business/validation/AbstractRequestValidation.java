@@ -35,6 +35,10 @@ public abstract class AbstractRequestValidation {
             return result;
         }
 
+        if (!file.isCreationDateValid()) {
+            return Constants.INVALID_FILE_NAME + " Current system date does not match the file creation date.";
+        }
+
         return Constants.VALID;
     }
 

@@ -1,0 +1,66 @@
+package org.landy.business;
+
+import org.apache.commons.io.FileUtils;
+import org.junit.Test;
+import org.landy.business.domain.file.BOBRequestFile;
+import org.landy.business.domain.file.PolicyRequestFile;
+import org.landy.business.domain.file.RequestFile;
+import org.landy.constants.Constants;
+import org.landy.test.SpringTestBase;
+import org.landy.utils.AssertUtil;
+import org.landy.utils.FileUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
+/**
+ * @author landyl
+ * @create 3:51 PM 05/13/2018
+ */
+public class RequestValidatorTest extends SpringTestBase {
+
+    @Autowired
+    private RequestValidator requestValidator;
+
+    @Test
+    public void testValidation() throws IOException {
+        String filePath = FileUtil.getFilePathByClassPath("/org/landy/business");
+//        String fileName = "csync_bob_integration_20180511_102637_324.txt";
+        String fileName = "csync_policy_20180510_101705_2.txt";
+        RequestFile requestFile;
+        if (fileName.startsWith("csync_policy_")) {
+            requestFile = new PolicyRequestFile();
+        } else {
+            requestFile = new BOBRequestFile();
+        }
+
+        requestFile.setFileName(fileName);
+
+
+        String validationResult;
+
+        validationResult = requestValidator.validateFileInfo(requestFile);
+        AssertUtil.assertTrue(Constants.VALID.equals(validationResult), validationResult);
+
+
+        File archiveFile = new File(filePath + File.separator + fileName);
+
+        System.out.println(archiveFile.getAbsolutePath());
+
+        List<String> textLines = FileUtils.readLines(archiveFile, Constants.ENCODING_UTF8);
+        requestFile.setTextLines(textLines);
+
+        validationResult = requestValidator.validateSummary(requestFile);
+        AssertUtil.assertTrue(Constants.VALID.equals(validationResult), validationResult);
+
+        validationResult = requestValidator.validateHeaders(requestFile);
+        AssertUtil.assertTrue(Constants.VALID.equals(validationResult), validationResult);
+
+        validationResult = requestValidator.validateDetails(requestFile);
+        AssertUtil.assertTrue(Constants.VALID.equals(validationResult), validationResult);
+
+    }
+
+}
