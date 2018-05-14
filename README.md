@@ -39,19 +39,18 @@ ConcreteHandler（具体处理者）： 抽象处理者的子类，处理用户�
 
 demo1:
 
-    客户端创建了三个处理者对象，并指定第一个处理者对象的下家是第二个处理者对象，第二个处理者对象的下家是第三个处理者对象。然后客户端将请求传递给第一个处理者对象。
+   客户端创建了三个处理者对象，并指定第一个处理者对象的下家是第二个处理者对象，第二个处理者对象的下家是第三个处理者对象。然后客户端将请求传递给第一个处理者对象。
 
 demo2:
 
-    1. 用Filter模拟处理Request、Response
+1. 用Filter模拟处理Request、Response
+2. 思路细节技巧：
 
-    2. 思路细节技巧：
+(1) Filter的doFilter方法改为doFilter(Request,Resopnse,FilterChain),有FilterChain引用，为利用FilterChain调用下一个Filter做准备。
 
-    (1) Filter的doFilter方法改为doFilter(Request,Resopnse,FilterChain),有FilterChain引用，为利用FilterChain调用下一个Filter做准备
-    
-    (2) FilterChain继承Filter,这样，FilterChain既是FilterChain又是Filter,那么FilterChain就可以调用Filter的方法doFilter(Request,Resopnse,FilterChain)
-    
-    (3) FilterChain的doFilter(Request,Resopnse,FilterChain)中，有index标记了执行到第几个Filter,当所有Filter执行完后request处理后，就会return,以倒序继续执行response处理
+(2) FilterChain继承Filter,这样，FilterChain既是FilterChain又是Filter,那么FilterChain就可以调用Filter的方法doFilter(Request,Resopnse,FilterChain)。
+
+(3) FilterChain的doFilter(Request,Resopnse,FilterChain)中，有index标记了执行到第几个Filter,当所有Filter执行完后request处理后，就会return,以倒序继续执行response处理。
 
 ## 3. 策略模式
 
