@@ -39,20 +39,19 @@ ConcreteHandler（具体处理者）： 抽象处理者的子类，处理用户�
 
 demo1:
 
-客户端创建了三个处理者对象，并指定第一个处理者对象的下家是第二个处理者对象，第二个处理者对象的下家是第三个处理者对象。
-然后客户端将请求传递给第一个处理者对象。
+    客户端创建了三个处理者对象，并指定第一个处理者对象的下家是第二个处理者对象，第二个处理者对象的下家是第三个处理者对象。然后客户端将请求传递给第一个处理者对象。
 
 demo2:
 
-1.用Filter模拟处理Request、Response
+    1. 用Filter模拟处理Request、Response
 
-2.思路细节技巧：
+    2. 思路细节技巧：
 
-(1)Filter的doFilter方法改为doFilter(Request,Resopnse,FilterChain),有FilterChain引用，为利用FilterChain调用下一个Filter做准备
-
-(2)FilterChain继承Filter,这样，FilterChain既是FilterChain又是Filter,那么FilterChain就可以调用Filter的方法doFilter(Request,Resopnse,FilterChain)
-
-(3)FilterChain的doFilter(Request,Resopnse,FilterChain)中，有index标记了执行到第几个Filter,当所有Filter执行完后request处理后，就会return,以倒序继续执行response处理
+    (1) Filter的doFilter方法改为doFilter(Request,Resopnse,FilterChain),有FilterChain引用，为利用FilterChain调用下一个Filter做准备
+    
+    (2) FilterChain继承Filter,这样，FilterChain既是FilterChain又是Filter,那么FilterChain就可以调用Filter的方法doFilter(Request,Resopnse,FilterChain)
+    
+    (3) FilterChain的doFilter(Request,Resopnse,FilterChain)中，有index标记了执行到第几个Filter,当所有Filter执行完后request处理后，就会return,以倒序继续执行response处理
 
 ## 3. 策略模式
 
@@ -83,6 +82,7 @@ OOP三个基本特征是:封装、继承、多态。通过继承，我们可以�
 ### 3.4 demo
 
 demo1:简单的使用工厂进行封装策略
+
 demo2:使用注解动态配置策略
 
 ## 4. 模板方法模式
@@ -235,9 +235,10 @@ RequestDetail及其子类就是workflow对应文件的明细内容。
 
 #### 3.3.1 门面模式
 
-在客户端调用程序中，采用门面模式进行统一的入口。此案例中，门面类为RequestValidationFacade，然后各个门面方法的参数均为抽象类
-RequestFile，通过RequestFile->getProcessWorkFlow()决定调用AbstractRequestValidation中的哪个子类。AbstractRequestValidation类构造方法
-中定义了如下逻辑：
+在客户端调用程序中，采用门面模式进行统一的入口（门面模式讲究的是脱离具体的业务逻辑代码）。门面模式封装的结果就是避免高层模块深入子系统内部，同时提供系统的高内聚、低耦合的特性。
+
+此案例中，门面类为RequestValidationFacade，然后各个门面方法的参数均为抽象类RequestFile，通过RequestFile->getProcessWorkFlow()决定调用AbstractRequestValidation中的哪个子类。
+AbstractRequestValidation类构造方法中定义了如下逻辑：
 
 ```
 requestValidationHandlerMap.put(this.accessWorkflow(),this.accessBeanName());
@@ -312,9 +313,10 @@ ValidatorChain为校验器链，含有两个接口方法：
 #### 3.3.4 策略模式
 
 如果单单从上面的校验器实现上来看，如果需要增加一个校验器，就需要在AbstractRequestValidation的子类方法validateFileDetails中添加，然后进行相应的校验操作。这样就会非常的麻烦，没有做到真正的解耦。
-此时，策略模式就发挥到了可以动态选择某种校验策略的作用。
+此时，策略模式就发挥到了可以动态选择某种校验策略的作用（Validator的实现类就是一个具体的校验策略）。
 
-AbstractValidatorHandler抽象类持有FileDetailValidatorChain类的对象，并且实现累Spring的一个接口ApplicationListener（是为了Spring容器启动完成的时候自动把相应的校验器加入到校验器链中）。核心就是WorkflowEnum这个策略枚举的作用，在子类可以动态的取得相应的校验器对象。
+AbstractValidatorHandler抽象类持有FileDetailValidatorChain类的对象，并且实现累Spring的一个接口ApplicationListener（是为了Spring容器启动完成的时候自动把相应的校验器加入到校验器链中）。
+核心就是WorkflowEnum这个策略枚举的作用，在子类可以动态的取得相应的校验器对象。
 
 根据子类提供需要的校验器所在的包名列表和不需要的校验器列表，动态配置出需要的校验器链表。核心实现逻辑如下：
 
