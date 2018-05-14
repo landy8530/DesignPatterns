@@ -22,6 +22,7 @@ import java.util.Map;
 public class FileDetailValidatorChain implements ValidatorChain {
 
     Map<WorkflowEnum,List<Validator>> validatorMap = new HashMap<>();
+    Map<WorkflowEnum,Integer> validatorIndexMap = new HashMap<>();
     /**
      * The int which is used to maintain the current position int the validator chain
      */
@@ -32,11 +33,21 @@ public class FileDetailValidatorChain implements ValidatorChain {
     @Override
     public String doValidate(RequestDetail requestDetail, RequestFile requestFile) throws BusinessValidationException {
         List<Validator> validators = validatorMap.get(workflowId);
+        //防止第二次文件校验的时候出现index没有重新设置为0
+        //并且每个业务流程的index应该是独立的
+        if(validatorIndexMap.containsKey(workflowId)) {
+            index = validatorIndexMap.get(workflowId) == null ? 0 : validatorIndexMap.get(workflowId);
+        } else {
+            index = 0;
+        }
+
 
         if(index == validators.size()) return Constants.VALID;
 
         Validator validator = validators.get(index);
         index ++;
+
+        validatorIndexMap.put(workflowId,index);
 
         return validator.doValidate(requestDetail,requestFile,this);
     }
@@ -61,6 +72,12 @@ public class FileDetailValidatorChain implements ValidatorChain {
 
         validatorMap.put(workflowId,validators);
         return this;
+    }
+
+    public void doClearValidatorIndex(WorkflowEnum workflowId) {
+        if(validatorIndexMap.containsKey(workflowId)) {
+            validatorIndexMap.put(workflowId,0);
+        }
     }
 
     public WorkflowEnum getWorkflowId() {

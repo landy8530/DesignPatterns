@@ -41,6 +41,7 @@ public abstract class AbstractValidatorHandler implements ApplicationListener<Co
     public String validate(RequestDetail requestDetail, RequestFile requestFile) {
         //must set the current workflowId
         fileDetailValidatorChain.setWorkflowId(getWorkflowId());
+        fileDetailValidatorChain.doClearValidatorIndex(getWorkflowId());
         return fileDetailValidatorChain.doValidate(requestDetail, requestFile);
     }
 
