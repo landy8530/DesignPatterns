@@ -223,13 +223,13 @@ public abstract String[] getDetailHeaders();
 
 RequestDetail及其子类就是workflow对应文件的明细内容。
 
-### 3.2 WorkflowEnum枚举介绍
+### 3.2 WorkflowEnum枚举策略
 
 本例中如下规定：
 1. workflow为WorkflowEnum.POLICY对应文件名为：csync_policy_yyyyMMdd_HHmmss_count.txt
 2. workflow为WorkflowEnum.BOB对应文件名为：csync_bob_integration_yyyyMMdd_HHmmss_count.txt
 
-以上校验逻辑在AbstractRequestValidation类相应的子类中实现（validateFileName方法）
+以上校验逻辑在AbstractRequestValidation类相应的子类中实现（validateFileName方法），其实这个枚举贯穿整个校验组件，它就是一个针对每个业务流程定义的一个枚举策略。
 
 ### 3.3 涉及到的设计模式实现思路
 
@@ -245,6 +245,8 @@ requestValidationHandlerMap.put(this.accessWorkflow(),this.accessBeanName());
 
 把子类中Spring自动注入的实体bean缓存到requestValidationHandlerMap中，key即为WorkflowEnum枚举值，value为spring bean name,
 然后在门面类中可以通过对应的枚举值取得BeanName，进而得到AbstractRequestValidation相应的子类对象，进行相应的校验操作。
+
+注：这边动态调用到AbstractRequestValidation相应的子类对象，其实也是隐藏着【策略模式】的影子。
 
 #### 3.3.2 模版方法模式
 
@@ -312,7 +314,8 @@ ValidatorChain为校验器链，含有两个接口方法：
 如果单单从上面的校验器实现上来看，如果需要增加一个校验器，就需要在AbstractRequestValidation的子类方法validateFileDetails中添加，然后进行相应的校验操作。这样就会非常的麻烦，没有做到真正的解耦。
 此时，策略模式就发挥到了可以动态选择某种校验策略的作用。
 
-AbstractValidatorHandler抽象类持有FileDetailValidatorChain类的对象，并且实现累Spring的一个接口ApplicationListener（是为了Spring容器启动完成的时候自动把相应的校验器加入到校验器链中）。
+AbstractValidatorHandler抽象类持有FileDetailValidatorChain类的对象，并且实现累Spring的一个接口ApplicationListener（是为了Spring容器启动完成的时候自动把相应的校验器加入到校验器链中）。核心就是WorkflowEnum这个策略枚举的作用，在子类可以动态的取得相应的校验器对象。
+
 根据子类提供需要的校验器所在的包名列表和不需要的校验器列表，动态配置出需要的校验器链表。核心实现逻辑如下：
 
 ```
