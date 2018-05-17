@@ -10,8 +10,9 @@ import java.util.Set;
  * @author landyl
  * @create 11:16 AM 05/09/2018
  */
-@Component
+@Component(PolicyValidatorHandler.BEAN_NAME)
 public class PolicyValidatorHandler extends AbstractValidatorHandler {
+    public static final String BEAN_NAME = "policyValidatorHandler";
 
     @Override
     protected WorkflowEnum getWorkflowId() {
@@ -32,5 +33,8 @@ public class PolicyValidatorHandler extends AbstractValidatorHandler {
         return classes;
     }
 
-
+    @Override
+    protected String accessBeanName() {
+        return BEAN_NAME;
+    }
 }

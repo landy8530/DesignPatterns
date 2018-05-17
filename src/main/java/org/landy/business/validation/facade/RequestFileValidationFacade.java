@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * @create 3:42 PM 05/07/2018
  */
 @Component
-public class RequestValidationFacade {
+public class RequestFileValidationFacade {
 
     public String validateFileInfo(RequestFile requestFile) {
         return accessRequestValidation(requestFile).validateFileInfo(requestFile);

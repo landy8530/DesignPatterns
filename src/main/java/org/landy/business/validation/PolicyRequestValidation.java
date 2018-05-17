@@ -1,14 +1,12 @@
 package org.landy.business.validation;
 
 import org.apache.commons.lang.StringUtils;
+import org.landy.business.constants.Constants;
 import org.landy.business.domain.detail.PolicyRequestDetail;
 import org.landy.business.domain.file.RequestFile;
 import org.landy.business.enums.WorkflowEnum;
-import org.landy.business.validation.handler.PolicyValidatorHandler;
-import org.landy.business.constants.Constants;
 import org.landy.utils.DateUtil;
 import org.landy.utils.StringUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -20,9 +18,6 @@ import java.util.List;
 @Component(value = PolicyRequestValidation.BEAN_NAME)
 public class PolicyRequestValidation extends AbstractRequestValidation {
     public static final String BEAN_NAME = "policyRequestValidation";
-
-    @Autowired
-    private PolicyValidatorHandler policyValidatorHandler;
 
     @Override
     protected String validateFileName(String fileName) {
@@ -94,7 +89,7 @@ public class PolicyRequestValidation extends AbstractRequestValidation {
     }
 
     private String validatePolicyDetail(PolicyRequestDetail requestDetail,RequestFile requestFile) {
-        return policyValidatorHandler.validate(requestDetail,requestFile);
+        return super.validateDetail(requestDetail,requestFile);
     }
 
 }

@@ -21,10 +21,6 @@ import java.util.List;
 public class BOBRequestValidation extends AbstractRequestValidation {
     public static final String BEAN_NAME = "bobRequestValidation";
 
-
-    @Autowired
-    private BOBValidatorHandler bobValidatorHandler;
-
     @Override
     protected String validateFileName(String fileName) {
         if (StringUtils.isEmpty(fileName)) return generateFileNameResult();
@@ -96,6 +92,6 @@ public class BOBRequestValidation extends AbstractRequestValidation {
     }
 
     private String validateBOBDetail(BOBRequestDetail requestDetail,RequestFile requestFile) {
-        return bobValidatorHandler.validate(requestDetail,requestFile);
+        return super.validateDetail(requestDetail,requestFile);
     }
 }

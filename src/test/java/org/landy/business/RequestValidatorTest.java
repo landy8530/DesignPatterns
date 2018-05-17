@@ -27,8 +27,8 @@ public class RequestValidatorTest extends SpringTestBase {
     @Test
     public void testValidation() throws IOException {
         String filePath = FileUtil.getFilePathByClassPath("/org/landy/business");
-        String fileName = "csync_bob_integration_20180514_102637_324.txt";
-//        String fileName = "csync_policy_20180510_101705_2.txt";
+//        String fileName = "csync_bob_integration_20180517_102637_324.txt";
+        String fileName = "csync_policy_20180517_101705_2.txt";
         RequestFile requestFile;
         if (fileName.startsWith("csync_policy_")) {
             requestFile = new PolicyRequestFile();

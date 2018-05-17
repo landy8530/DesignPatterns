@@ -21,6 +21,15 @@ public enum WorkflowEnum {
         return value;
     }
 
+    public static WorkflowEnum fromValue(int value) {
+        for (WorkflowEnum option : values()) {
+            if (option.getValue() == value) {
+                return option;
+            }
+        }
+        return UNKNOWN;
+    }
+
     public static boolean isBOB(int value) {
         return BOB.value == value;
     }

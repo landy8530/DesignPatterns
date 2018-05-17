@@ -1,7 +1,7 @@
 package org.landy.business;
 
 import org.landy.business.domain.file.RequestFile;
-import org.landy.business.validation.facade.RequestValidationFacade;
+import org.landy.business.validation.facade.RequestFileValidationFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class RequestValidator {
 
     @Autowired
-    private RequestValidationFacade requestValidationFacade;
+    private RequestFileValidationFacade requestValidationFacade;
 
     public String validateFileInfo(RequestFile file) {
         return requestValidationFacade.validateFileInfo(file);

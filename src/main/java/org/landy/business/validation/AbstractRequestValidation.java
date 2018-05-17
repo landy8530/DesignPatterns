@@ -1,13 +1,16 @@
 package org.landy.business.validation;
 
 import org.apache.commons.lang3.StringUtils;
+import org.landy.business.domain.detail.RequestDetail;
 import org.landy.business.domain.file.RequestFile;
 import org.landy.business.enums.WorkflowEnum;
 import org.landy.business.constants.Constants;
+import org.landy.business.validation.facade.RequestDetailValidationFacade;
 import org.landy.exception.BusinessValidationException;
 import org.landy.web.utils.ApplicationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +24,9 @@ public abstract class AbstractRequestValidation {
     protected static final Logger LOGGER = LoggerFactory.getLogger(AbstractRequestValidation.class);
 
     private static Map<WorkflowEnum,String> requestValidationHandlerMap = new HashMap<>();
+
+    @Autowired
+    private RequestDetailValidationFacade requestDetailValidationFacade;
 
     public AbstractRequestValidation() {
         requestValidationHandlerMap.put(this.accessWorkflow(),this.accessBeanName());
@@ -93,6 +99,10 @@ public abstract class AbstractRequestValidation {
 
     protected final String generateFileNameResult() {
         return Constants.INVALID_FILE_NAME + " The file name format should be \"" + accessFileNameFormat() + "\"";
+    }
+
+    protected final String validateDetail(RequestDetail requestDetail, RequestFile requestFile) {
+        return requestDetailValidationFacade.validate(requestDetail,requestFile);
     }
 
     ////////////////////////////////////////////////////////////////////
