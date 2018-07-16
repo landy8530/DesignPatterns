@@ -405,7 +405,7 @@ RequestDetail及其子类就是workflow对应文件的明细内容。
 
 本例中如下规定：
 1. workflow为WorkflowEnum.POLICY对应文件名为：xhf_policy_yyyyMMdd_HHmmss_count.txt
-2. workflow为WorkflowEnum.XHF对应文件名为：xhf_XHF_integration_yyyyMMdd_HHmmss_count.txt
+2. workflow为WorkflowEnum.XHF对应文件名为：xhf_integration_yyyyMMdd_HHmmss_count.txt
 
 以上校验逻辑在AbstractRequestValidation类相应的子类中实现（validateFileName方法），其实这个枚举贯穿整个校验组件，它就是一个针对每个业务流程定义的一个枚举策略。
 
