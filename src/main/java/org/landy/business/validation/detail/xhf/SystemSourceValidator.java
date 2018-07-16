@@ -1,8 +1,8 @@
-package org.landy.business.validation.detail.bob;
+package org.landy.business.validation.detail.xhf;
 
 import org.apache.commons.lang.StringUtils;
-import org.landy.business.domain.detail.BOBRequestDetail;
-import org.landy.business.domain.file.BOBRequestFile;
+import org.landy.business.domain.detail.XHFRequestDetail;
+import org.landy.business.domain.file.XHFRequestFile;
 import org.landy.business.validation.Validator;
 import org.landy.business.validation.ValidatorChain;
 import org.landy.business.validation.ValidatorConstants;
@@ -13,10 +13,10 @@ import org.springframework.stereotype.Component;
  * @author landyl
  * @create 2:57 PM 05/09/2018
  */
-@Component(ValidatorConstants.BEAN_NAME_BOB_SYSTEM_SOURCE)
-public class SystemSourceValidator implements Validator<BOBRequestDetail,BOBRequestFile> {
+@Component(ValidatorConstants.BEAN_NAME_XHF_SYSTEM_SOURCE)
+public class SystemSourceValidator implements Validator<XHFRequestDetail,XHFRequestFile> {
 
-    public String doValidate(BOBRequestDetail detail, BOBRequestFile file, ValidatorChain chain) throws BusinessValidationException {
+    public String doValidate(XHFRequestDetail detail, XHFRequestFile file, ValidatorChain chain) throws BusinessValidationException {
         if (StringUtils.isEmpty(detail.getSystemSourceId())) {
             return "System Source ID is required when current flow is GMG integration workflow..";
         }

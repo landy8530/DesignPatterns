@@ -1,6 +1,6 @@
 package org.landy.business.domain.detail;
 
-public class BOBRequestDetail extends RequestDetail {
+public class XHFRequestDetail extends RequestDetail {
     private String systemSource;
     private String systemSourceId;
     private String isPolicy;

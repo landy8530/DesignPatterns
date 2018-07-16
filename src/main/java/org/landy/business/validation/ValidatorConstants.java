@@ -9,10 +9,10 @@ public final class ValidatorConstants {
     //common
     public final static String BEAN_NAME_ROW_NUM = "rowNumberValidator";
 
-    //BOB
-    public final static String BEAN_NAME_BOB_SYSTEM_SOURCE = "systemSourceValidator";
-    public final static String BEAN_NAME_BOB_GENDER = "genderValidator";
-    public final static String BEAN_NAME_BOB_STATUS_CODE = "statusCodeValidator";
+    //XHF
+    public final static String BEAN_NAME_XHF_SYSTEM_SOURCE = "systemSourceValidator";
+    public final static String BEAN_NAME_XHF_GENDER = "genderValidator";
+    public final static String BEAN_NAME_XHF_STATUS_CODE = "statusCodeValidator";
 
     //policy
     public final static String BEAN_NAME_POLICY_BUSINESS_LINE = "businessLineValidator";

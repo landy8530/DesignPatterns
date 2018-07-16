@@ -27,8 +27,8 @@ public class PolicyRequestValidation extends AbstractRequestValidation {
         String[] nameParts = fileName.split(Constants.DELIMITER_UNDERSCORE);
         if (nameParts.length != 5) return generateFileNameResult();
 
-        //csync_policy_yyyyMMdd_HHmmss_count.txt
-        if (!"csync".equals(nameParts[index++])) return generateFileNameResult();
+        //xhf_policy_yyyyMMdd_HHmmss_count.txt
+        if (!"xhf".equals(nameParts[index++])) return generateFileNameResult();
         if (!"policy".equals(nameParts[index++])) return generateFileNameResult();
 
         String creationDateStr = nameParts[index++] + "_" + nameParts[index++];
@@ -80,7 +80,7 @@ public class PolicyRequestValidation extends AbstractRequestValidation {
 
     @Override
     protected String accessFileNameFormat() {
-        return "csync_policy_yyyyMMdd_HHmmss_count.txt";
+        return "xhf_policy_yyyyMMdd_HHmmss_count.txt";
     }
 
     @Override

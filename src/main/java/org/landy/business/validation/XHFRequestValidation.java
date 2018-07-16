@@ -1,14 +1,12 @@
 package org.landy.business.validation;
 
 import org.apache.commons.lang.StringUtils;
-import org.landy.business.domain.detail.BOBRequestDetail;
+import org.landy.business.domain.detail.XHFRequestDetail;
 import org.landy.business.domain.file.RequestFile;
 import org.landy.business.enums.WorkflowEnum;
-import org.landy.business.validation.handler.BOBValidatorHandler;
 import org.landy.business.constants.Constants;
 import org.landy.utils.DateUtil;
 import org.landy.utils.StringUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -17,9 +15,9 @@ import java.util.List;
  * @author landyl
  * @create 2:37 PM 05/07/2018
  */
-@Component(value = BOBRequestValidation.BEAN_NAME)
-public class BOBRequestValidation extends AbstractRequestValidation {
-    public static final String BEAN_NAME = "bobRequestValidation";
+@Component(value = XHFRequestValidation.BEAN_NAME)
+public class XHFRequestValidation extends AbstractRequestValidation {
+    public static final String BEAN_NAME = "xhfRequestValidation";
 
     @Override
     protected String validateFileName(String fileName) {
@@ -27,11 +25,10 @@ public class BOBRequestValidation extends AbstractRequestValidation {
 
         int index = 0;
         String[] nameParts = fileName.split(Constants.DELIMITER_UNDERSCORE);
-        if (nameParts.length != 6) return generateFileNameResult();
+        if (nameParts.length != 5) return generateFileNameResult();
 
-        //csync_bob_integration_yyyyMMdd_HHmmss_count.txt
-        if (!"csync".equals(nameParts[index++])) return generateFileNameResult();
-        if (!"bob".equals(nameParts[index++])) return generateFileNameResult();
+        //xhf_integration_yyyyMMdd_HHmmss_count.txt
+        if (!"xhf".equals(nameParts[index++])) return generateFileNameResult();
         if (!"integration".equals(nameParts[index++])) return generateFileNameResult();
 
         String creationDateStr = nameParts[index++] + "_" + nameParts[index++];
@@ -56,7 +53,7 @@ public class BOBRequestValidation extends AbstractRequestValidation {
 
     @Override
     protected StringBuilder validateFileDetails(StringBuilder errMsg, RequestFile requestFile) {
-        List<BOBRequestDetail> requestBOBDetails = requestFile.getRequestDetails();
+        List<XHFRequestDetail> requestBOBDetails = requestFile.getRequestDetails();
         if (requestBOBDetails == null || requestBOBDetails.size() == 0) {
             return errMsg.append(" No details were provided on the request.");
         }
@@ -78,12 +75,12 @@ public class BOBRequestValidation extends AbstractRequestValidation {
 
     @Override
     protected WorkflowEnum accessWorkflow() {
-        return WorkflowEnum.BOB;
+        return WorkflowEnum.XHF;
     }
 
     @Override
     protected String accessFileNameFormat() {
-        return "csync_bob_integration_yyyyMMdd_HHmmss_count.txt";
+        return "xhf_integration_yyyyMMdd_HHmmss_count.txt";
     }
 
     @Override
@@ -91,7 +88,7 @@ public class BOBRequestValidation extends AbstractRequestValidation {
         return BEAN_NAME;
     }
 
-    private String validateBOBDetail(BOBRequestDetail requestDetail,RequestFile requestFile) {
+    private String validateBOBDetail(XHFRequestDetail requestDetail, RequestFile requestFile) {
         return super.validateDetail(requestDetail,requestFile);
     }
 }

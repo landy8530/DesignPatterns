@@ -2,7 +2,7 @@ package org.landy.business;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
-import org.landy.business.domain.file.BOBRequestFile;
+import org.landy.business.domain.file.XHFRequestFile;
 import org.landy.business.domain.file.PolicyRequestFile;
 import org.landy.business.domain.file.RequestFile;
 import org.landy.business.constants.Constants;
@@ -27,13 +27,13 @@ public class RequestValidatorTest extends SpringTestBase {
     @Test
     public void testValidation() throws IOException {
         String filePath = FileUtil.getFilePathByClassPath("/org/landy/business");
-//        String fileName = "csync_bob_integration_20180517_102637_324.txt";
-        String fileName = "csync_policy_20180517_101705_2.txt";
+//        String fileName = "test_20180517_102637_324.txt";
+        String fileName = "xhf_integration_20180716_101705_2.txt";
         RequestFile requestFile;
-        if (fileName.startsWith("csync_policy_")) {
+        if (fileName.startsWith("xhf_policy_")) {
             requestFile = new PolicyRequestFile();
         } else {
-            requestFile = new BOBRequestFile();
+            requestFile = new XHFRequestFile();
         }
 
         requestFile.setFileName(fileName);

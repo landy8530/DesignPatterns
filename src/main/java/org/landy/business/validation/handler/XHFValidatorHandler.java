@@ -10,19 +10,19 @@ import java.util.Set;
  * @author landyl
  * @create 11:16 AM 05/09/2018
  */
-@Component(BOBValidatorHandler.BEAN_NAME)
-public class BOBValidatorHandler extends AbstractValidatorHandler {
-    public static final String BEAN_NAME = "bOBValidatorHandler";
+@Component(XHFValidatorHandler.BEAN_NAME)
+public class XHFValidatorHandler extends AbstractValidatorHandler {
+    public static final String BEAN_NAME = "xHFValidatorHandler";
 
     @Override
     protected WorkflowEnum getWorkflowId() {
-        return WorkflowEnum.BOB;
+        return WorkflowEnum.XHF;
     }
 
     @Override
     protected Set<String> getBasePackages() {
         Set<String> packages = new HashSet<>();
-        packages.add("org.landy.business.validation.detail.bob");
+        packages.add("org.landy.business.validation.detail.xhf");
         packages.add("org.landy.business.validation.detail.common");
         return packages;
     }

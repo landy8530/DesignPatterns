@@ -7,7 +7,7 @@ package org.landy.business.enums;
 public enum WorkflowEnum {
     UNKNOWN(0),
     POLICY(1),
-    BOB(5),
+    XHF(5),
 
     ;
 
@@ -31,7 +31,7 @@ public enum WorkflowEnum {
     }
 
     public static boolean isBOB(int value) {
-        return BOB.value == value;
+        return XHF.value == value;
     }
 
     public static boolean isPolicy(int value) {

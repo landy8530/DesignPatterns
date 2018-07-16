@@ -331,12 +331,44 @@ CGLIB代理总结：
 1. CGLIB创建的动态代理对象比JDK创建的动态代理对象的性能更高，但是CGLIB创建代理对象时所花费的时间却比JDK多得多。所以对于单例的对象，因为无需频繁创建对象，用CGLIB合适，反之使用JDK方式要更为合适一些。
 2. 同时由于CGLib由于是采用动态创建子类的方法，对于final修饰的方法无法进行代理。
 
+## 9. 装饰模式
+
+### 9.1 模式动机
+
+一般有两种方式可以实现给一个类或对象增加行为：
+
+继承机制，使用继承机制是给现有类添加功能的一种有效途径，通过继承一个现有类可以使得子类在拥有自身方法的同时还拥有父类的方法。但是这种方法是静态的，用户不能控制增加行为的方式和时机。
+关联机制，即将一个类的对象嵌入另一个对象中，由另一个对象来决定是否调用嵌入对象的行为以便扩展自己的行为，我们称这个嵌入的对象为装饰器(Decorator)
+装饰模式以对客户透明的方式动态地给一个对象附加上更多的责任，换言之，客户端并不会觉得对象在装饰前和装饰后有什么不同。装饰模式可以在不需要创造更多子类的情况下，将对象的功能加以扩展。这就是装饰模式的模式动机。
+
+### 9.2 模式定义
+
+装饰模式的定义是：装饰模式又名包装(Wrapper)模式。装饰模式以对客户端透明的方式扩展对象的功能，是继承关系的一个替代方案。
+
+### 9.3 模式结构
+
+装饰模式包含如下角色：
+
+Component: 抽象构件
+ConcreteComponent: 具体构件
+Decorator: 抽象装饰类
+ConcreteDecorator: 具体装饰类
+
+### 9.4 应用场景
+
+装饰器模式的应用场景：
+
+1. 需要扩展一个类的功能。
+2. 动态的为一个对象增加功能，而且还能动态撤销。（继承不能做到这一点，继承的功能是静态的，不能动态增删。）
+
+缺点：产生过多相似的对象，不易排错！
+
 # 设计模式综合运用
 
 ## 1. 项目背景
 
 在公司的一个实际项目中，需要做一个第三方公司（以下简称GMG）的系统集成工作，把该公司的一些订单数据集成到自己公司平台下，各个订单具有一些共性，但是也有其特有的特征。
-经过设计，目前我把订单分为POLICY和BOB类型（暂且这么说吧，反正就是一种订单类型，大家参照着看就OK）。
+经过设计，目前我把订单分为POLICY和XHF类型（暂且这么说吧，反正就是一种订单类型，大家参照着看就OK）。
 
 在订单数据集成到公司平台前，需要对订单数据进行一些必要的业务逻辑校验操作，并且每个订单都有自己的校验逻辑（包含公共的校验逻辑）。
 本节介绍的便是整个订单集成系统中的校验逻辑在综合利用设计模式的基础上进行架构设计。
@@ -372,8 +404,8 @@ RequestDetail及其子类就是workflow对应文件的明细内容。
 ### 3.2 WorkflowEnum枚举策略
 
 本例中如下规定：
-1. workflow为WorkflowEnum.POLICY对应文件名为：csync_policy_yyyyMMdd_HHmmss_count.txt
-2. workflow为WorkflowEnum.BOB对应文件名为：csync_bob_integration_yyyyMMdd_HHmmss_count.txt
+1. workflow为WorkflowEnum.POLICY对应文件名为：xhf_policy_yyyyMMdd_HHmmss_count.txt
+2. workflow为WorkflowEnum.XHF对应文件名为：xhf_XHF_integration_yyyyMMdd_HHmmss_count.txt
 
 以上校验逻辑在AbstractRequestValidation类相应的子类中实现（validateFileName方法），其实这个枚举贯穿整个校验组件，它就是一个针对每个业务流程定义的一个枚举策略。
 
@@ -415,13 +447,13 @@ requestValidationHandlerMap.put(this.accessWorkflow(),this.accessBeanName());
     protected abstract String validateFileName(String fileName);
 
     /**
-     * return the current CSYNC_UPDATE_WORKFLOW.UPDATE_WORKFLOW_ID
+     * return the current xhf_UPDATE_WORKFLOW.UPDATE_WORKFLOW_ID
      * @return
      */
     protected abstract WorkflowEnum accessWorkflow();
 
     /**
-     * return the current file name's format ,such as: csync_policy_yyyyMMdd_HHmmss_count.txt
+     * return the current file name's format ,such as: xhf_policy_yyyyMMdd_HHmmss_count.txt
      * @return
      */
     protected abstract String accessFileNameFormat();

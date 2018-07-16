@@ -11,10 +11,10 @@ import org.slf4j.LoggerFactory;
  * @author landyl
  * @create 11:16 AM 03/28/2018
  */
-public class BOBIntegrationBuilder implements IntegrationBuilder {
+public class XHFIntegrationBuilder implements IntegrationBuilder {
     private IntegrationData integrationData;
 
-    public BOBIntegrationBuilder() {
+    public XHFIntegrationBuilder() {
         this.integrationData = new IntegrationData();
     }
 
