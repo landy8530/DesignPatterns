@@ -1,6 +1,8 @@
 package org.landy.factory.simple;
 
+import org.landy.factory.BluetoothSender;
 import org.landy.factory.Sender;
+import org.landy.factory.WiFiSender;
 
 /**
  * @author landyl

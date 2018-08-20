@@ -1,7 +1,7 @@
 package org.landy.factory.method;
 
 import org.landy.factory.Sender;
-import org.landy.factory.simple.BluetoothSender;
+import org.landy.factory.BluetoothSender;
 
 /**
  * @author landyl

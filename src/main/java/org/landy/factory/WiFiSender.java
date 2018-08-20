@@ -1,4 +1,4 @@
-package org.landy.factory.simple;
+package org.landy.factory;
 
 import org.landy.factory.Sender;
 
