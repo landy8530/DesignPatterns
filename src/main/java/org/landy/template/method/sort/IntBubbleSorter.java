@@ -1,15 +1,15 @@
-package org.landy.template.method;
+package org.landy.template.method.sort;
 
 /**
  * @author landyl
- * @create 4:02 PM 05/12/2018
+ * @create 4:01 PM 05/12/2018
  */
-public class DoubleBubbleSorter extends BubbleSorter<double[]> {
+public class IntBubbleSorter extends BubbleSorter<int[]> {
 
-    private double[] array;
+    private int[] array;
 
     @Override
-    protected void setArray(double[] array) {
+    protected void setArray(int[] array) {
         this.array = array;
     }
 
@@ -25,9 +25,8 @@ public class DoubleBubbleSorter extends BubbleSorter<double[]> {
 
     @Override
     protected void swap(int index) {
-        double temp = array[index];
+        int temp = array[index];
         array[index] = array[index + 1];
         array[index + 1] = temp;
     }
-
 }

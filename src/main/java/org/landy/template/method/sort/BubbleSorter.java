@@ -1,4 +1,4 @@
-package org.landy.template.method;
+package org.landy.template.method.sort;
 
 /**
  * @author landyl
