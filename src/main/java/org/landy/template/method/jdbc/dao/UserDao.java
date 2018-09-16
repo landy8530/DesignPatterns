@@ -3,26 +3,25 @@ package org.landy.template.method.jdbc.dao;
 
 import org.landy.template.method.jdbc.JdbcTemplate;
 import org.landy.template.method.jdbc.RowMapper;
-import org.landy.template.method.jdbc.entity.Member;
+import org.landy.template.method.jdbc.entity.User;
 
 import java.sql.ResultSet;
 import java.util.List;
 
 /**
  * 不用继承，主要是为了解耦
- * Created by Tom on 2018/3/11.
  */
-public class MemberDao {
+public class UserDao {
 
     //为什么不继承，主要是为了解耦
     private JdbcTemplate jdbcTemplate = new JdbcTemplate(null);
 
     public List<?> query(){
-        String sql = "select * from t_member";
-        return jdbcTemplate.executeQuery(sql,new RowMapper<Member>(){
+        String sql = "select * from t_user";
+        return jdbcTemplate.executeQuery(sql,new RowMapper<User>(){
             @Override
-            public Member mapRow(ResultSet rs, int rowNum) throws Exception {
-                Member member = new Member();
+            public User mapRow(ResultSet rs, int rowNum) throws Exception {
+                User member = new User();
                 member.setUsername(rs.getString("username"));
                 member.setPassword(rs.getString("password"));
                 member.setAge(rs.getInt("age"));

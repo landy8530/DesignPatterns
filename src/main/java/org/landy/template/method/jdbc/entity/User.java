@@ -1,9 +1,6 @@
 package org.landy.template.method.jdbc.entity;
 
-/**
- * Created by Tom on 2018/3/11.
- */
-public class Member {
+public class User {
 
     private String username;
     private String password;

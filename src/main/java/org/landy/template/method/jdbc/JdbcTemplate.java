@@ -9,9 +9,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Tom on 2018/3/11.
- */
 public class JdbcTemplate {
 
     private DataSource dataSource;
@@ -28,9 +25,9 @@ public class JdbcTemplate {
     }
 
 
-    private ResultSet executeQuery(PreparedStatement pstmt,Object [] values) throws  Exception{
-        for (int i = 0; i <values.length; i ++){
-            pstmt.setObject(i,values[i]);
+    private ResultSet executeQuery(PreparedStatement pstmt,Object [] paramValues) throws  Exception{
+        for (int i = 0; i <paramValues.length; i ++){
+            pstmt.setObject(i,paramValues[i]);
         }
         return  pstmt.executeQuery();
     }
@@ -59,7 +56,7 @@ public class JdbcTemplate {
     }
 
 
-    public List<?> executeQuery(String sql,RowMapper<?> rowMapper,Object [] values){
+    public List<?> executeQuery(String sql,RowMapper<?> rowMapper,Object [] paramValues){
         try {
 
             //1、获取连接
@@ -67,7 +64,7 @@ public class JdbcTemplate {
             //2、创建语句集
             PreparedStatement pstmt = this.createPreparedStatement(conn,sql);
             //3、执行语句集，并且获得结果集
-            ResultSet rs = this.executeQuery(pstmt,values);
+            ResultSet rs = this.executeQuery(pstmt,paramValues);
             //4、解析语句集
             List<?> result = this.parseResultSet(rs,rowMapper);
 
