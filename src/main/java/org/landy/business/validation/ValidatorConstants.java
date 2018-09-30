@@ -6,7 +6,7 @@ package org.landy.business.validation;
  */
 public final class ValidatorConstants {
 
-    //common
+    //component
     public final static String BEAN_NAME_ROW_NUM = "rowNumberValidator";
 
     //XHF
@@ -14,7 +14,7 @@ public final class ValidatorConstants {
     public final static String BEAN_NAME_XHF_GENDER = "genderValidator";
     public final static String BEAN_NAME_XHF_STATUS_CODE = "statusCodeValidator";
 
-    //policy
+    //customer
     public final static String BEAN_NAME_POLICY_BUSINESS_LINE = "businessLineValidator";
     public final static String BEAN_NAME_POLICY_MEMBER_COUNT = "memberCountValidator";
 }

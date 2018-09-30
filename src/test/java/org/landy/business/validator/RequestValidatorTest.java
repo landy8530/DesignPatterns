@@ -1,7 +1,8 @@
-package org.landy.business;
+package org.landy.business.validator;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
+import org.landy.business.RequestValidator;
 import org.landy.business.domain.file.XHFRequestFile;
 import org.landy.business.domain.file.PolicyRequestFile;
 import org.landy.business.domain.file.RequestFile;

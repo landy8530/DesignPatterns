@@ -22,8 +22,8 @@ public class PolicyValidatorHandler extends AbstractValidatorHandler {
     @Override
     protected Set<String> getBasePackages() {
         Set<String> packages = new HashSet<>();
-        packages.add("org.landy.business.validation.detail.policy");
-        packages.add("org.landy.business.validation.detail.common");
+        packages.add("org.landy.business.validation.detail.customer");
+        packages.add("org.landy.business.validation.detail.component");
         return packages;
     }
 

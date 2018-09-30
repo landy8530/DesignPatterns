@@ -29,7 +29,7 @@ public class PolicyRequestValidation extends AbstractRequestValidation {
 
         //xhf_policy_yyyyMMdd_HHmmss_count.txt
         if (!"xhf".equals(nameParts[index++])) return generateFileNameResult();
-        if (!"policy".equals(nameParts[index++])) return generateFileNameResult();
+        if (!"customer".equals(nameParts[index++])) return generateFileNameResult();
 
         String creationDateStr = nameParts[index++] + "_" + nameParts[index++];
         if (!DateUtil.isValidDate(creationDateStr, DateUtil.DATE_TIME_PATTERN_1)) {
