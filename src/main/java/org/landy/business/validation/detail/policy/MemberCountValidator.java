@@ -19,7 +19,7 @@ public class MemberCountValidator implements Validator<PolicyRequestDetail,Polic
 
     public String doValidate(PolicyRequestDetail detail, PolicyRequestFile file, ValidatorChain chain) throws BusinessValidationException {
         if (!isValidMemberCount(detail.getMemberCount())) {
-            return "An invalid Member count was provided. Accepted Value(s): 0 - 10.";
+            return "An invalid User count was provided. Accepted Value(s): 0 - 10.";
         }
         return chain.doValidate(detail,file);
     }
