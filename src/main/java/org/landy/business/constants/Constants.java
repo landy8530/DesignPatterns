@@ -21,4 +21,5 @@ public class Constants {
     public static final String DELIMITER_COLON = ":";
     public static final String DELIMITER_PIPE = "\\|";
 
+    public static final int UPDATE_STATUS_VALID_UPDATE = 0;
 }

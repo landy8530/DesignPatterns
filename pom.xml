@@ -20,6 +20,7 @@
     <!--Spring -->
     <!--<spring.version>4.2.3.RELEASE</spring.version>-->
     <spring.version>5.0.8.RELEASE</spring.version>
+    <aspectj.version>1.8.7</aspectj.version>
 
     <!-- log4j -->
     <slf4j.version>1.7.5</slf4j.version>
@@ -152,6 +153,28 @@
       <scope>compile</scope>
     </dependency>
 
+    <!-- aspectj -->
+    <!--Spring-aspects 实现类似 aspectj 注解方式的时候，借用了 aspectjweaver.jar 中定义的一些annotation 和 class，然而其并不使用 Aspectj 的字节码织入功能。-->
+    <!--Spring AOP使用JDK Proxy或者cglib实现代理类生成。对于有实现接口的类使用JDK Proxy，对于无接口的则是用cglib.通过-->
+    <!--<aop:aspectj-autoproxy proxy-target-class="true"/>-->
+    <!--指定proxy-target-class为true可强制使用cglib.-->
+    <!--aspectjtools.jar包主要是提供赫赫有名的ajc编译器，可以在编译期将将java文件或者class文件或者aspect文件定义的切面织入到业务代码中。
+    通常这个东西会被封装进各种IDE插件或者自动化插件中。
+    -->
+    <!-- aspectjrt.jar包主要是提供运行时的一些注解，静态方法等等东西，通常我们要使用aspectJ的时候都要使用这个包。 -->
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjrt</artifactId>
+      <version>${aspectj.version}</version>
+    </dependency>
+    <!-- aspectjweaverjar包主要是提供了一个java agent用于在类加载期间织入切面(Load time weaving)。
+    并且提供了对切面语法的相关处理等基础方法，供ajc使用或者供第三方开发使用。这个包一般我们不需要显式引用，除非需要使用LTW。
+     -->
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjweaver</artifactId>
+      <version>${aspectj.version}</version>
+    </dependency>
 
     <dependency>
       <groupId>junit</groupId>
