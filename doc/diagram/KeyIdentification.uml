@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>org.landy.business.identify.customer.CustomerIdentify4ForeignKey</OriginalElement>
+  <nodes>
+    <node x="617.9999999999998" y="220.0">org.landy.business.identify.order.identification.primary.OrderIdentification0</node>
+    <node x="802.9999999999998" y="220.0">org.landy.business.identify.order.identification.primary.OrderIdentification1</node>
+    <node x="1970.7105437665778" y="377.0">org.landy.business.identify.customer.CustomerIdentify4ForeignKey</node>
+    <node x="561.5165782493366" y="0.0">org.landy.business.identify.component.primary.KeyIdentification</node>
+    <node x="1608.710543766578" y="247.0">org.landy.business.identify.order.AbstractOrderIdentify</node>
+    <node x="0.0" y="220.0">org.landy.business.identify.customer.identification.primary.CustomerIdentification2</node>
+    <node x="1307.2025862068963" y="379.0">org.landy.business.identify.order.OrderIdentify4PrimaryKey</node>
+    <node x="703.2499999999998" y="298.0">org.landy.business.identify.order.facade.OrderIdentifyFacade</node>
+    <node x="411.9999999999998" y="220.0">org.landy.business.identify.customer.identification.primary.CustomerIdentification0</node>
+    <node x="206.0" y="220.0">org.landy.business.identify.customer.identification.primary.CustomerIdentification1</node>
+    <node x="986.9999999999998" y="91.0">org.landy.business.identify.component.primary.DefaultKeyIdentificationChain</node>
+    <node x="292.0165782493366" y="0.0">org.landy.business.identify.component.annotation.KeyIdentificationStrategy</node>
+    <node x="1530.3749999999998" y="380.0">org.landy.business.identify.order.OrderIdentify4ForeignKey</node>
+    <node x="170.58554376657798" y="292.0">org.landy.business.identify.customer.facade.CustomerIdentifyFacade</node>
+    <node x="1231.210543766578" y="0.0">org.springframework.stereotype.Component</node>
+    <node x="1812.335543766578" y="249.0">org.landy.business.identify.customer.AbstractCustomerIdentify</node>
+    <node x="1743.4999999999998" y="377.0">org.landy.business.identify.customer.CustomerIdentify4PrimaryKey</node>
+    <node x="1008.4999999999998" y="0.0">org.landy.business.identify.component.primary.KeyIdentificationChain</node>
+    <node x="1714.960543766578" y="121.0">org.landy.business.identify.component.AbstractIdentify</node>
+    <node x="1046.710543766578" y="279.0">org.landy.business.identify.component.factory.KeyIdentificationFactory</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="org.landy.business.identify.customer.CustomerIdentify4PrimaryKey" target="org.springframework.stereotype.Component">
+      <point x="0.0" y="-15.0" />
+      <point x="1880.9999999999998" y="360.0" />
+      <point x="1938.085543766578" y="360.0" />
+      <point x="1938.085543766578" y="170.0" />
+      <point x="1324.9028514588856" y="170.0" />
+      <point x="35.69230769230762" y="15.0" />
+    </edge>
+    <edge source="org.landy.business.identify.order.identification.primary.OrderIdentification1" target="org.landy.business.identify.component.annotation.KeyIdentificationStrategy">
+      <point x="-55.0" y="-15.0" />
+      <point x="830.4999999999998" y="70.0" />
+      <point x="464.81657824933666" y="70.0" />
+      <point x="76.80000000000007" y="15.0" />
+    </edge>
+    <edge source="org.landy.business.identify.order.OrderIdentify4PrimaryKey" target="org.springframework.stereotype.Component">
+      <point x="-66.0" y="-15.0" />
+      <point x="1260.2025862068963" y="360.0" />
+      <point x="1238.9999999999998" y="360.0" />
+      <point x="1238.9999999999998" y="200.0" />
+      <point x="1289.210543766578" y="200.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="org.landy.business.identify.order.AbstractOrderIdentify" target="org.landy.business.identify.component.AbstractIdentify">
+      <point x="0.0" y="-15.0" />
+      <point x="-34.75" y="15.0" />
+    </edge>
+    <edge source="org.landy.business.identify.component.primary.DefaultKeyIdentificationChain" target="org.springframework.stereotype.Component">
+      <point x="72.33333333333337" y="-15.0" />
+      <point x="1168.8333333333333" y="190.0" />
+      <point x="1280.287466843501" y="190.0" />
+      <point x="-8.923076923076906" y="15.0" />
+    </edge>
+    <edge source="org.landy.business.identify.customer.identification.primary.CustomerIdentification1" target="org.landy.business.identify.component.primary.KeyIdentification">
+      <point x="0.0" y="-15.0" />
+      <point x="299.0" y="120.0" />
+      <point x="597.5165782493366" y="120.0" />
+      <point x="-36.0" y="15.0" />
+    </edge>
+    <edge source="org.landy.business.identify.order.identification.primary.OrderIdentification1" target="org.landy.business.identify.component.primary.KeyIdentification">
+      <point x="0.0" y="-15.0" />
+      <point x="885.4999999999998" y="60.0" />
+      <point x="669.5165782493366" y="60.0" />
+      <point x="36.0" y="15.0" />
+    </edge>
+    <edge source="org.landy.business.identify.customer.identification.primary.CustomerIdentification0" target="org.springframework.stereotype.Component">
+      <point x="62.0" y="-15.0" />
+      <point x="566.9999999999998" y="160.0" />
+      <point x="1253.5182360742704" y="160.0" />
+      <point x="-35.69230769230762" y="15.0" />
+    </edge>
+    <edge source="org.landy.business.identify.order.identification.primary.OrderIdentification1" target="org.springframework.stereotype.Component">
+      <point x="55.0" y="-15.0" />
+      <point x="940.4999999999998" y="180.0" />
+      <point x="1271.3643899204242" y="180.0" />
+      <point x="-17.84615384615381" y="15.0" />
+    </edge>
+    <edge source="org.landy.business.identify.customer.identification.primary.CustomerIdentification2" target="org.springframework.stereotype.Component">
+      <point x="62.0" y="-15.0" />
+      <point x="155.0" y="140.0" />
+      <point x="1235.6720822281166" y="140.0" />
+      <point x="-53.53846153846143" y="15.0" />
+    </edge>
+    <edge source="org.landy.business.identify.component.factory.KeyIdentificationFactory" target="org.landy.business.identify.component.primary.DefaultKeyIdentificationChain">
+      <point x="-46.5" y="-15.0" />
+      <point x="1097.210543766578" y="286.0" />
+      <point x="1096.4999999999998" y="275.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="org.landy.business.identify.customer.CustomerIdentify4ForeignKey" target="org.springframework.stereotype.Component">
+      <point x="54.75" y="-15.0" />
+      <point x="2224.9605437665778" y="360.0" />
+      <point x="2199.8355437665778" y="360.0" />
+      <point x="2199.8355437665778" y="150.0" />
+      <point x="1342.7490053050394" y="150.0" />
+      <point x="53.53846153846143" y="15.0" />
+    </edge>
+    <edge source="org.landy.business.identify.order.OrderIdentify4ForeignKey" target="org.springframework.stereotype.Component">
+      <point x="49.5" y="-15.0" />
+      <point x="1678.8749999999998" y="360.0" />
+      <point x="1729.085543766578" y="360.0" />
+      <point x="1729.085543766578" y="190.0" />
+      <point x="1307.0566976127318" y="190.0" />
+      <point x="17.84615384615381" y="15.0" />
+    </edge>
+    <edge source="org.landy.business.identify.order.OrderIdentify4PrimaryKey" target="org.landy.business.identify.order.AbstractOrderIdentify">
+      <point x="66.0" y="-15.0" />
+      <point x="1473.2025862068963" y="359.0" />
+      <point x="1549.210543766578" y="360.0" />
+      <point x="-43.5" y="15.0" />
+    </edge>
+    <edge source="org.landy.business.identify.component.primary.DefaultKeyIdentificationChain" target="org.landy.business.identify.component.primary.KeyIdentification">
+      <point x="-72.33333333333326" y="-15.0" />
+      <point x="1024.1666666666665" y="50.0" />
+      <point x="693.5165782493366" y="50.0" />
+      <point x="60.0" y="15.0" />
+    </edge>
+    <edge source="org.landy.business.identify.customer.CustomerIdentify4ForeignKey" target="org.landy.business.identify.customer.AbstractCustomerIdentify">
+      <point x="-54.75" y="-15.0" />
+      <point x="1992.4605437665778" y="381.0" />
+      <point x="1990.5855437665778" y="368.0" />
+      <point x="48.75" y="15.0" />
+    </edge>
+    <edge source="org.landy.business.identify.customer.identification.primary.CustomerIdentification1" target="org.landy.business.identify.component.annotation.KeyIdentificationStrategy">
+      <point x="-62.0" y="-15.0" />
+      <point x="237.0" y="100.0" />
+      <point x="349.6165782493367" y="100.0" />
+      <point x="-38.39999999999998" y="15.0" />
+    </edge>
+    <edge source="org.landy.business.identify.order.OrderIdentify4ForeignKey" target="org.landy.business.identify.order.AbstractOrderIdentify">
+      <point x="-49.5" y="-15.0" />
+      <point x="1579.8749999999998" y="360.0" />
+      <point x="1636.210543766578" y="360.0" />
+      <point x="43.5" y="15.0" />
+    </edge>
+    <edge source="org.landy.business.identify.order.identification.primary.OrderIdentification0" target="org.landy.business.identify.component.annotation.KeyIdentificationStrategy">
+      <point x="-55.0" y="-15.0" />
+      <point x="645.4999999999998" y="90.0" />
+      <point x="426.4165782493367" y="90.0" />
+      <point x="38.400000000000034" y="15.0" />
+    </edge>
+    <edge source="org.landy.business.identify.customer.identification.primary.CustomerIdentification0" target="org.landy.business.identify.component.primary.KeyIdentification">
+      <point x="0.0" y="-15.0" />
+      <point x="504.9999999999998" y="130.0" />
+      <point x="621.5165782493366" y="130.0" />
+      <point x="-12.0" y="15.0" />
+    </edge>
+    <edge source="org.landy.business.identify.customer.identification.primary.CustomerIdentification2" target="org.landy.business.identify.component.primary.KeyIdentification">
+      <point x="0.0" y="-15.0" />
+      <point x="93.0" y="110.0" />
+      <point x="573.5165782493366" y="110.0" />
+      <point x="-60.0" y="15.0" />
+    </edge>
+    <edge source="org.landy.business.identify.customer.AbstractCustomerIdentify" target="org.landy.business.identify.component.AbstractIdentify">
+      <point x="0.0" y="-15.0" />
+      <point x="1851.8355437665778" y="251.0" />
+      <point x="1853.210543766578" y="257.0" />
+      <point x="34.75" y="15.0" />
+    </edge>
+    <edge source="org.landy.business.identify.customer.CustomerIdentify4PrimaryKey" target="org.landy.business.identify.customer.AbstractCustomerIdentify">
+      <point x="73.0" y="-15.0" />
+      <point x="1892.9999999999998" y="392.0" />
+      <point x="1891.085543766578" y="362.0" />
+      <point x="-48.75" y="15.0" />
+    </edge>
+    <edge source="org.landy.business.identify.order.identification.primary.OrderIdentification0" target="org.springframework.stereotype.Component">
+      <point x="55.0" y="-15.0" />
+      <point x="755.4999999999998" y="170.0" />
+      <point x="1262.4413129973473" y="170.0" />
+      <point x="-26.769230769230717" y="15.0" />
+    </edge>
+    <edge source="org.landy.business.identify.customer.identification.primary.CustomerIdentification1" target="org.springframework.stereotype.Component">
+      <point x="62.0" y="-15.0" />
+      <point x="361.0" y="150.0" />
+      <point x="1244.5951591511935" y="150.0" />
+      <point x="-44.61538461538453" y="15.0" />
+    </edge>
+    <edge source="org.landy.business.identify.component.factory.KeyIdentificationFactory" target="org.springframework.stereotype.Component">
+      <point x="46.5" y="-15.0" />
+      <point x="1439.210543766578" y="200.0" />
+      <point x="1298.133620689655" y="200.0" />
+      <point x="8.923076923076906" y="15.0" />
+    </edge>
+    <edge source="org.landy.business.identify.customer.facade.CustomerIdentifyFacade" target="org.springframework.stereotype.Component">
+      <point x="0.0" y="-15.0" />
+      <point x="1207.585543766578" y="179.0" />
+      <point x="1315.9797745358087" y="180.0" />
+      <point x="26.769230769230717" y="15.0" />
+    </edge>
+    <edge source="org.landy.business.identify.order.identification.primary.OrderIdentification0" target="org.landy.business.identify.component.primary.KeyIdentification">
+      <point x="0.0" y="-15.0" />
+      <point x="700.4999999999998" y="80.0" />
+      <point x="645.5165782493366" y="80.0" />
+      <point x="12.0" y="15.0" />
+    </edge>
+    <edge source="org.landy.business.identify.component.primary.DefaultKeyIdentificationChain" target="org.landy.business.identify.component.primary.KeyIdentificationChain">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="org.landy.business.identify.order.facade.OrderIdentifyFacade" target="org.springframework.stereotype.Component">
+      <point x="0.0" y="-15.0" />
+      <point x="2080.75" y="160.0" />
+      <point x="1333.8259283819625" y="160.0" />
+      <point x="44.61538461538453" y="15.0" />
+    </edge>
+    <edge source="org.landy.business.identify.customer.identification.primary.CustomerIdentification2" target="org.landy.business.identify.component.annotation.KeyIdentificationStrategy">
+      <point x="-62.0" y="-15.0" />
+      <point x="31.0" y="90.0" />
+      <point x="311.21657824933664" y="90.0" />
+      <point x="-76.80000000000001" y="15.0" />
+    </edge>
+    <edge source="org.landy.business.identify.customer.CustomerIdentify4PrimaryKey" target="org.landy.business.identify.component.factory.KeyIdentificationFactory">
+      <point x="-73.0" y="-15.0" />
+      <point x="1779.9999999999998" y="357.0" />
+      <point x="1187.210543766578" y="339.0" />
+      <point x="46.5" y="15.0" />
+    </edge>
+    <edge source="org.landy.business.identify.customer.identification.primary.CustomerIdentification0" target="org.landy.business.identify.component.annotation.KeyIdentificationStrategy">
+      <point x="-62.0" y="-15.0" />
+      <point x="442.9999999999998" y="100.0" />
+      <point x="388.0165782493366" y="100.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="org.landy.business.identify.order.OrderIdentify4PrimaryKey" target="org.landy.business.identify.component.factory.KeyIdentificationFactory">
+      <point x="0.0" y="-15.0" />
+      <point x="1406.2025862068963" y="363.0" />
+      <point x="1092.210543766578" y="358.0" />
+      <point x="-46.5" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="1086.0" y="184.5" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
