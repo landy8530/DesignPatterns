@@ -1,11 +1,9 @@
 package org.landy.business.identify.order.identification.primary;
 
 import org.landy.business.enums.WorkflowEnum;
-import org.landy.business.identify.component.annotation.IdentifyPriority;
 import org.landy.business.identify.component.annotation.KeyIdentificationStrategy;
 import org.landy.business.identify.component.domain.IdentifyCriterion;
 import org.landy.business.identify.component.enums.IdentificationResultType;
-import org.landy.business.identify.component.enums.PrimaryKeyCombination;
 import org.landy.business.identify.component.primary.KeyIdentification;
 import org.landy.business.identify.component.primary.KeyIdentificationChain;
 import org.springframework.stereotype.Component;
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Component;
  * @author landyl
  * @create 10:52 AM 09/06/2018
  */
-@IdentifyPriority(workflowId = WorkflowEnum.ORDER)
 @KeyIdentificationStrategy(workflowId = WorkflowEnum.ORDER,beanName = OrderIdentification1.BEAN_NAME)
 @Component
 public class OrderIdentification1 implements KeyIdentification {

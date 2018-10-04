@@ -2,7 +2,6 @@ package org.landy.business.identify.component.factory;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.landy.business.enums.WorkflowEnum;
-import org.landy.business.identify.component.annotation.IdentifyPriority;
 import org.landy.business.identify.component.annotation.KeyIdentificationStrategy;
 import org.landy.business.identify.component.domain.IdentifyCriterion;
 import org.landy.business.identify.component.enums.IdentificationResultType;
@@ -69,7 +68,7 @@ public class KeyIdentificationFactory implements ApplicationListener<ContextRefr
                 //业务流程类型
                 WorkflowEnum workflowId = strategy.workflowId();
 
-                IdentifyPriority priority = getIdentifyPriority(v);
+                KeyIdentificationStrategy priority = getPrimaryKeyIdentificationStrategy(v).get();
 
                 LOGGER.info("To add identification:{},spring bean name is:{},the identify priority is:{},workflowId:{}",simpleName,beanName,priority.priority(),workflowId.name());
 
@@ -153,16 +152,20 @@ public class KeyIdentificationFactory implements ApplicationListener<ContextRefr
 
     /**
      * define a comparator of the KeyIdentification object through the priority of the IdentifyPriority for sort purpose.
-     * @see IdentifyPriority
+     * @see KeyIdentificationStrategy
      */
     private class KeyIdentificationComparator implements Comparator {
         @Override
         public int compare(Object objClass1, Object objClass2) {
             if(objClass1 != null && objClass2 != null) {
-                IdentifyPriority ip1 = getIdentifyPriority((Class)objClass1);
-                IdentifyPriority ip2 = getIdentifyPriority((Class)objClass2);
-                Integer priority1 = ip1 == null ? 0 : ip1.priority();
-                Integer priority2 = ip2 == null ? 0 : ip2.priority();
+                Optional<KeyIdentificationStrategy> strategyOptional1 = getPrimaryKeyIdentificationStrategy((Class)objClass1);
+                Optional<KeyIdentificationStrategy> strategyOptional2 = getPrimaryKeyIdentificationStrategy((Class)objClass2);
+
+                KeyIdentificationStrategy ip1 = strategyOptional1.get();
+                KeyIdentificationStrategy ip2 = strategyOptional2.get();
+
+                Integer priority1 = ip1.priority();
+                Integer priority2 = ip2.priority();
 
                 WorkflowEnum workflow1 = ip1.workflowId();
                 WorkflowEnum workflow2 = ip2.workflowId();
@@ -175,16 +178,6 @@ public class KeyIdentificationFactory implements ApplicationListener<ContextRefr
             }
             return 0;
         }
-    }
-
-    private IdentifyPriority getIdentifyPriority(Class clazz) {
-        //find the annotation object from the class type
-        boolean isExist = clazz.isAnnotationPresent(IdentifyPriority.class);
-        if(isExist){
-            IdentifyPriority v = (IdentifyPriority)clazz.getAnnotation(IdentifyPriority.class);
-            return v;
-        }
-        return null;
     }
 
 }
