@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * @create 2:22 PM 09/30/2018
  */
 @Component
-public class CustomerUpdateRule implements UpdateRule {
+public class CustomerUpdateRule  implements UpdateRule { //
 
     //利用自定义注解，进行AOP切面编程，进行其他业务逻辑的校验操作
     @StatusCheck

@@ -40,7 +40,7 @@ public class StatusCheckAspect {
     @Before("declareJoinPointExpression()")
     public void beforeCheck(JoinPoint joinPoint) {
         System.out.println("before statusCheck method start ...");
-        System.out.println(joinPoint.getSignature());
+        System.out.println("target class:" + joinPoint.getTarget());
         //获得自定义注解的参数
         String methodName = joinPoint.getSignature().getName();
         List<Object> args = Arrays.asList(joinPoint.getArgs());

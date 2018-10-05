@@ -3,6 +3,7 @@ package org.landy.business.rules;
 import org.junit.Test;
 import org.landy.business.rules.domain.CheckResult;
 import org.landy.business.rules.stategy.CustomerUpdateRule;
+import org.landy.business.rules.stategy.UpdateRule;
 import org.landy.test.SpringTestBase;
 import org.landy.utils.AssertUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +15,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class CustomerUpdateRuleTest extends SpringTestBase {
 
     @Autowired
-    private CustomerUpdateRule customerUpdateRule;
+//    private CustomerUpdateRule customerUpdateRule;//CGLib代理方式使用类方式注入
+    private UpdateRule customerUpdateRule; //JDK代理方式必须以接口方式注入
 
     @Test
     public void customerCheckTest() {
         //ApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfigure.class);
         System.out.println("customerCheckTest");
+        System.out.println("proxy class:" + customerUpdateRule.getClass());
         CheckResult checkResult = customerUpdateRule.check("2","currentStatus");
         AssertUtil.assertTrue(checkResult.getCheckResult() == 0,"与预期结果不一致");
     }
