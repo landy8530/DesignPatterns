@@ -819,14 +819,13 @@ public enum WorkflowEnum {
 
 ![查询抽象模型](https://github.com/landy8530/DesignPatterns/raw/master/doc/abstractModel.png)
 
-
 ##### 2.1.2.2 组合主键查询策略
 
-
+![组合主键查询策略](https://github.com/landy8530/DesignPatterns/raw/master/doc/KeyIdentificationStrategy.png)
 
 ##### 2.1.2.3 组合主键查询责任链
 
-
+![组合主键查询责任链](https://github.com/landy8530/DesignPatterns/raw/master/doc/KeyIdentificationChain.png)
 
 ### 2.2 Java注解简介
 
