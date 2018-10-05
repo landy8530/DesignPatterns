@@ -817,6 +817,8 @@ public enum WorkflowEnum {
 
 ##### 2.1.2.1 查询抽象模型
 
+![查询抽象模型](https://github.com/landy8530/DesignPatterns/raw/master/doc/abstractModel.png)
+
 
 ##### 2.1.2.2 组合主键查询策略
 
