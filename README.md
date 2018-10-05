@@ -76,18 +76,35 @@
     * [11.1 概念](#111-概念)
     * [11.2 特点](#112-特点)
     * [11.3 应用场景](#113-应用场景)
-* [设计模式综合运用(门面+模版方法+责任链+策略)](#设计模式综合运用(门面+模版方法+责任链+策略))
-  * [1. 项目背景](#1-项目背景)
-  * [2. 校验逻辑](#2-校验逻辑)
-  * [3. 实现细节](#3-实现细节)
-    * [3.1 domain介绍](#31-domain介绍)
-    * [3.2 WorkflowEnum枚举策略](#32-workflowenum枚举策略)
-    * [3.3 涉及到的设计模式实现思路](#33-涉及到的设计模式实现思路)
-      * [3.3.1 门面模式](#331-门面模式)
-      * [3.3.2 模版方法模式](#332-模版方法模式)
-      * [3.3.3 责任链模式](#333-责任链模式)
-      * [3.3.4 策略模式](#334-策略模式)
-
+* [设计模式综合运用](#设计模式综合运用)
+  * [1. 门面+模版方法+责任链+策略](#1-门面模版方法责任链策略)
+    * [1.1 项目背景](#11-项目背景)
+    * [1.2 校验逻辑](#12-校验逻辑)
+    * [1.3 实现细节](#13-实现细节)
+      * [1.3.1 domain介绍](#131-domain介绍)
+      * [1.3.2 WorkflowEnum枚举策略](#132-workflowenum枚举策略)
+      * [1.3.3 涉及到的设计模式实现思路](#133-涉及到的设计模式实现思路)
+        * [1.3.3.1 门面模式](#1331-门面模式)
+        * [1.3.3.2 模版方法模式](#1332-模版方法模式)
+        * [1.3.3.3 责任链模式](#1333-责任链模式)
+        * [1.3.3.4 策略模式](#1334-策略模式)
+  * [2. 门面+模版方法+责任链+策略+工厂方法](#2-门面模版方法责任链策略工厂方法)
+    * [2.1 项目背景](#21-项目背景)
+      * [2.1.1 项目简介](#211-项目简介)
+      * [2.1.2 流程梳理](#212-流程梳理)
+        * [2.1.2.1 查询抽象模型](#2121-查询抽象模型)
+        * [2.1.2.2 组合主键查询策略](#2122-组合主键查询策略)
+        * [2.1.2.3 组合主键查询责任链](#2123-组合主键查询责任链)
+    * [2.2 Java注解简介](#22-java注解简介)
+      * [2.2.1 元注解](#221-元注解)
+      * [2.2.2 自定义注解](#222-自定义注解)
+      * [2.2.3 使用注解](#223-使用注解)
+    * [2.3 策略模式升级版](#23-策略模式升级版)
+      * [2.3.1 策略模式实现方式](#231-策略模式实现方式)
+      * [2.3.2 注解方式优点](#232-注解方式优点)
+      * [2.3.3 组合主键查询策略](#233-组合主键查询策略)
+      * [2.3.4 策略工厂](#234-策略工厂)
+    
 # 设计模式简介
 
 设计模式是用来解决复杂问题的，把复杂问题简单化，不要生搬硬套，不要把简单问题复杂化。
@@ -589,9 +606,11 @@ Spring 默认是采用单例模式
 
 在Spring中，以Delegate结尾的类，以Dispatcher结尾的类基本上都是委派模式实现。
 
-# 设计模式综合运用(门面+模版方法+责任链+策略)
+# 设计模式综合运用
 
-## 1. 项目背景
+## 1. 门面+模版方法+责任链+策略
+
+### 1.1 项目背景
 
 在公司的一个实际项目中，需要做一个第三方公司（以下简称XHF）的系统集成工作，把该公司的一些订单数据集成到自己公司平台下，各个订单具有一些共性，但是也有其特有的特征。
 经过设计，目前我把订单分为POLICY和XHF类型（暂且这么说吧，反正就是一种订单类型，大家参照着看就OK）。
@@ -599,7 +618,7 @@ Spring 默认是采用单例模式
 在订单数据集成到公司平台前，需要对订单数据进行一些必要的业务逻辑校验操作，并且每个订单都有自己的校验逻辑（包含公共的校验逻辑）。
 本节介绍的便是整个订单集成系统中的校验逻辑在综合利用设计模式的基础上进行架构设计。
 
-## 2. 校验逻辑
+### 1.2 校验逻辑
 
 本校验逻辑主要分为四个部分：
 1. 校验文件名称（RequestValidator.validateFileInfo）
@@ -609,9 +628,9 @@ Spring 默认是采用单例模式
 
 其实上面的RequestValidator的实现逻辑最后都是委托给RequestValidationFacade这个门面类进行相应的校验操作。
 
-## 3. 实现细节
+### 1.3 实现细节
 
-### 3.1 domain介绍
+#### 1.3.1 domain介绍
 
 主要分为RequestFile和RequestDetail两个domain,RequestFile接收泛型的类型（即RequestFile<T extends RequestDetail>）,
 使得其子类能够自动识别相应的RequestDetail的子类。RequestFile为抽象类，定义了以下抽象方法，由子类实现：
@@ -627,7 +646,7 @@ public abstract String[] getDetailHeaders();
 
 RequestDetail及其子类就是workflow对应文件的明细内容。
 
-### 3.2 WorkflowEnum枚举策略
+#### 1.3.2 WorkflowEnum枚举策略
 
 本例中如下规定：
 1. workflow为WorkflowEnum.POLICY对应文件名为：xhf_policy_yyyyMMdd_HHmmss_count.txt
@@ -635,9 +654,9 @@ RequestDetail及其子类就是workflow对应文件的明细内容。
 
 以上校验逻辑在AbstractRequestValidation类相应的子类中实现（validateFileName方法），其实这个枚举贯穿整个校验组件，它就是一个针对每个业务流程定义的一个枚举策略。
 
-### 3.3 涉及到的设计模式实现思路
+#### 1.3.3 涉及到的设计模式实现思路
 
-#### 3.3.1 门面模式
+##### 1.3.3.1 门面模式
 
 在客户端调用程序中，采用门面模式进行统一的入口（门面模式讲究的是脱离具体的业务逻辑代码）。门面模式封装的结果就是避免高层模块深入子系统内部，同时提供系统的高内聚、低耦合的特性。
 
@@ -653,7 +672,7 @@ requestValidationHandlerMap.put(this.accessWorkflow(),this.accessBeanName());
 
 注：这边动态调用到AbstractRequestValidation相应的子类对象，其实也是隐藏着【策略模式】的影子。
 
-#### 3.3.2 模版方法模式
+##### 1.3.3.2 模版方法模式
 
 在具体的校验逻辑中，用到核心设计模式便是模版方法模式，AbstractRequestValidation抽象类中定义了以下抽象方法：
 ```
@@ -694,7 +713,7 @@ requestValidationHandlerMap.put(this.accessWorkflow(),this.accessBeanName());
 
 以上抽象方法就类似我们常说的钩子函数，由子类实现即可。
 
-#### 3.3.3 责任链模式
+##### 1.3.3.3 责任链模式
 
 在AbstractRequestValidation抽象类中有个抽象方法validateFileDetails，校验的是文件的明细内容中的相应业务规则，此为核心校验，
 较为复杂，而且针对每个业务流程，其校验逻辑相差较大，在此处，利用了责任链模式进行处理。
@@ -714,7 +733,7 @@ ValidatorChain为校验器链，含有两个接口方法：
 ```
 该处有一个addValidator方法，为ValidatorChain对象添加校验器的方法，返回本身。对应于每个业务流程需要哪些校验器就在此实现即可（即AbstractRequestValidation的子类方法validateFileDetails）。
 
-#### 3.3.4 策略模式
+##### 1.3.3.4 策略模式
 
 如果单单从上面的校验器实现上来看，如果需要增加一个校验器，就需要在AbstractRequestValidation的子类方法validateFileDetails中添加，然后进行相应的校验操作。这样就会非常的麻烦，没有做到真正的解耦。
 此时，策略模式就发挥到了可以动态选择某种校验策略的作用（Validator的实现类就是一个具体的校验策略）。
@@ -760,13 +779,13 @@ protected abstract Set<Class> excludeClasses();
 
 ```
 
-# 设计模式综合运用（门面+模版方法+责任链+策略+工厂方法）
+## 2. 门面+模版方法+责任链+策略+工厂方法
 
 上一节在实现策略模式的实现上，发现了一个弊端：那就是如果在后续业务发展中，需要再次增加一个业务策略的时候，则需要再次继承`AbstractValidatorHandler`类（详情请参见上篇文章），这样就会造成一定的类膨胀。今天我利用注解的方式改造成动态策略模式，这样就只需要关注自己的业务类即可，无需再实现一个类似的Handler类。
 
-## 1. 项目背景
+### 2.1 项目背景
 
-### 1.1 项目简介
+#### 2.1.1 项目简介
 
 在公司的一个业务系统中，有这样的一个需求，就是根据不同的业务流程，可以根据不同的组合主键策略进行动态的数据业务查询操作。在本文中，我假设有这样两种业务，客户信息查询和订单信息查询，对应以下枚举类：
 
@@ -792,26 +811,26 @@ public enum WorkflowEnum {
 
 以上仅是假设性操作，实际业务规则比这复杂的多
 
-### 1.2 流程梳理 
+#### 2.1.2 流程梳理 
 
 主要业务流程，可以参照以下简单的业务流程图。
 
-#### 1.2.1 查询抽象模型
+##### 2.1.2.1 查询抽象模型
 
 
-#### 1.2.2 组合主键查询策略
-
-
-
-#### 1.2.3 组合主键查询责任链
+##### 2.1.2.2 组合主键查询策略
 
 
 
-## 2. Java注解简介
+##### 2.1.2.3 组合主键查询责任链
+
+
+
+### 2.2 Java注解简介
 
 注解的语法比较简单，除了@符号的使用之外，它基本与Java固有语法一致。
 
-### 2.1 元注解
+#### 2.2.1 元注解
 
 JDK1.5提供了4种标准元注解，专门负责新注解的创建。
 
@@ -822,7 +841,7 @@ JDK1.5提供了4种标准元注解，专门负责新注解的创建。
 | @Document  | 将注解包含在Javadoc中                                        |
 | @Inherited | 允许子类继承父类中的注解                                     |
 
-### 2.2 自定义注解
+#### 2.2.2 自定义注解
 
 定义一个注解的方式相当简单，如下代码所示：
 
@@ -847,7 +866,7 @@ public @interface Description {
 
 注解的可用的类型包括以下几种：所有基本类型、String、Class、enum、Annotation、以上类型的数组形式。元素不能有不确定的值，即要么有默认值，要么在使用注解的时候提供元素的值。而且元素不能使用null作为默认值。注解在只有一个元素且该元素的名称是value的情况下，在使用注解的时候可以省略“value=”，直接写需要的值即可。 
 
-### 2.3 使用注解
+#### 2.2.3 使用注解
 
 如上所示的注解使用如下：
 
@@ -920,9 +939,9 @@ public class ParseAnnotation {
 }
 ```
 
-## 3. 策略模式升级版
+### 2.3 策略模式升级版
 
-### 3.1 策略模式实现方式
+#### 2.3.1 策略模式实现方式
 
 1. 使用工厂进行简单的封装
 2. 使用注解动态配置策略
@@ -931,11 +950,11 @@ public class ParseAnnotation {
 
 其中第1、2点请参见`org.landy.strategy` 包下的demo事例即可，而第4点的方式其实就是结合第1、2、3点的优点进行整合的方式。
 
-### 3.2 注解方式优点
+#### 2.3.2 注解方式优点
 
 使用注解方式可以极大的减少使用模版方法模式带来的扩展时需要继承模版类的弊端，工厂+注解的方式可以无需关心其他业务类的实现，而且减少了类膨胀的风险。
 
-### 3.3 组合主键查询策略
+#### 2.3.3 组合主键查询策略
 
 本文以`组合主键查询策略`这一策略进行说明，策略注解如下：
 
@@ -969,13 +988,13 @@ public @interface KeyIdentificationStrategy {
 }
 ```
 
-### 3.4 策略工厂
+#### 2.3.4 策略工厂
 
 既然定义了组合主键查询策略注解，那必然需要一个**注解处理器**进行解析注解的操作，本文以工厂的方式进行。主要逻辑如下：
 
 1. 扫描指定包下的Java类，找出相应接口（即`KeyIdentification`）下的所有Class对象。
 
-   ```
+   ```java
    private List<Class<? extends KeyIdentification>> getIdentifications() {
            Set<String> packageNames = this.getBasePackages();
            List<Class<? extends KeyIdentification>> identifications = new ArrayList<>();
@@ -988,7 +1007,7 @@ public @interface KeyIdentificationStrategy {
 
 2. 解析注解`KeyIdentificationStrategy`，定义一个排序对象（`KeyIdentificationComparator`），指定优先级。
 
-   ```
+   ```java
    private class KeyIdentificationComparator implements Comparator {
        @Override
        public int compare(Object objClass1, Object objClass2) {
@@ -1018,7 +1037,7 @@ public @interface KeyIdentificationStrategy {
 
 3. 根据注解，把相应业务类型的组合主键查询策略对象放入容器中（即`DefaultKeyIdentificationChain`）。
 
-   ```
+   ```java
    KeyIdentificationStrategy strategy = strategyOptional.get();
                    String beanName = strategy.beanName();
                    //业务流程类型
@@ -1031,7 +1050,7 @@ public @interface KeyIdentificationStrategy {
 
 4. 后续，在各自对应的业务查询组件对象中即可使用该工厂对象调用如下方法，即可进行相应的查询操作。
 
-```
+```java
 public IdentificationResultType identify(IdentifyCriterion identifyCriterion,WorkflowEnum workflowId) {
         defaultKeyIdentificationChain.doClearIdentificationIndex(workflowId);
         return defaultKeyIdentificationChain.doIdentify(identifyCriterion,workflowId);
