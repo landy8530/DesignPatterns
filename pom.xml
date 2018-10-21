@@ -7,7 +7,14 @@
   <groupId>org.landy</groupId>
   <artifactId>design-patterns</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <packaging>war</packaging>
+  <modules>
+      <module>design-patterns-basic</module>
+      <module>design-patterns-spring</module>
+      <module>design-patterns-mybatis</module>
+      <module>design-patterns-core</module>
+    <module>design-patterns-business</module>
+  </modules>
+  <packaging>pom</packaging>
 
   <name>design-patterns Maven Webapp</name>
   <!-- FIXME change it to the project's website -->
