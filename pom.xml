@@ -103,7 +103,11 @@
       <artifactId>commons-beanutils</artifactId>
       <version>1.9.2</version>
     </dependency>
-
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-configuration2</artifactId>
+      <version>2.4</version>
+    </dependency>
     <!-- Spring -->
     <dependency>
       <groupId>org.springframework</groupId>
