@@ -23,7 +23,7 @@ public class XHFValidatorHandler extends AbstractValidatorHandler {
     protected Set<String> getBasePackages() {
         Set<String> packages = new HashSet<>();
         packages.add("org.landy.business.validation.detail.xhf");
-        packages.add("org.landy.business.validation.detail.component");
+        packages.add("org.landy.business.validation.detail.common");
         return packages;
     }
 

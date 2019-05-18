@@ -1,6 +1,6 @@
 package org.landy.business.validation.util;
 
-import org.landy.business.domain.detail.PolicyRequestDetail;
+import org.landy.business.domain.detail.CustomerRequestDetail;
 import org.landy.business.validation.ValidatorConstants;
 import org.landy.business.validation.detail.common.GenderValidator;
 import org.landy.business.validation.detail.common.IsActiveValidator;
@@ -75,8 +75,8 @@ public final class ValidatorUtil {
         return Constants.EMPTY_STRING;
     }
 
-    public static void setNullIfInvalid(PolicyRequestDetail detail, String columnName) {
-        Field dataField = ReflectionUtils.findField(PolicyRequestDetail.class,columnName);
+    public static void setNullIfInvalid(CustomerRequestDetail detail, String columnName) {
+        Field dataField = ReflectionUtils.findField(CustomerRequestDetail.class,columnName);
         ReflectionUtils.makeAccessible(dataField);
         ReflectionUtils.setField(dataField,detail,null);
     }

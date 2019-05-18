@@ -1,6 +1,6 @@
 package org.landy.business.domain.detail;
 
-public class PolicyRequestDetail extends RequestDetail {
+public class CustomerRequestDetail extends RequestDetail {
 
     private String parentCarrierId;
     private String applicationId;

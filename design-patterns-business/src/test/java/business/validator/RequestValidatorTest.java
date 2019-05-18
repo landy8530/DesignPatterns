@@ -4,7 +4,7 @@ import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.landy.business.RequestValidator;
 import org.landy.business.domain.file.XHFRequestFile;
-import org.landy.business.domain.file.PolicyRequestFile;
+import org.landy.business.domain.file.CustomerRequestFile;
 import org.landy.business.domain.file.RequestFile;
 import org.landy.constants.Constants;
 import test.SpringTestBase;
@@ -30,9 +30,10 @@ public class RequestValidatorTest extends SpringTestBase {
         String filePath = FileUtil.getFilePathByClassPath("/org/landy/business");
 //        String fileName = "test_20180517_102637_324.txt";
         String fileName = "xhf_customer_20190518_101705_2.txt";
+//        String fileName = "xhf_integration_20190518_101705_2.txt";
         RequestFile requestFile;
         if (fileName.startsWith("xhf_customer_")) {
-            requestFile = new PolicyRequestFile();
+            requestFile = new CustomerRequestFile();
         } else {
             requestFile = new XHFRequestFile();
         }

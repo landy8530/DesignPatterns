@@ -11,9 +11,9 @@ import java.util.Set;
  * @author landyl
  * @create 11:16 AM 05/09/2018
  */
-@Component(PolicyValidatorHandler.BEAN_NAME)
-public class PolicyValidatorHandler extends AbstractValidatorHandler {
-    public static final String BEAN_NAME = "policyValidatorHandler";
+@Component(CustomerValidatorHandler.BEAN_NAME)
+public class CustomerValidatorHandler extends AbstractValidatorHandler {
+    public static final String BEAN_NAME = "customerValidatorHandler";
 
     @Override
     protected WorkflowEnum getWorkflowId() {
@@ -24,7 +24,7 @@ public class PolicyValidatorHandler extends AbstractValidatorHandler {
     protected Set<String> getBasePackages() {
         Set<String> packages = new HashSet<>();
         packages.add("org.landy.business.validation.detail.customer");
-        packages.add("org.landy.business.validation.detail.component");
+        packages.add("org.landy.business.validation.detail.common");
         return packages;
     }
 

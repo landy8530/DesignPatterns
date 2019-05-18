@@ -1,8 +1,8 @@
 package org.landy.business.validation.detail.customer;
 
 import org.apache.commons.lang.StringUtils;
-import org.landy.business.domain.detail.PolicyRequestDetail;
-import org.landy.business.domain.file.PolicyRequestFile;
+import org.landy.business.domain.detail.CustomerRequestDetail;
+import org.landy.business.domain.file.CustomerRequestFile;
 import org.landy.business.validation.Validator;
 import org.landy.business.validation.ValidatorChain;
 import org.landy.business.validation.ValidatorConstants;
@@ -15,9 +15,9 @@ import org.springframework.stereotype.Component;
  * @create 2:57 PM 05/09/2018
  */
 @Component(ValidatorConstants.BEAN_NAME_CUSTOMER_MEMBER_COUNT)
-public class MemberCountValidator implements Validator<PolicyRequestDetail,PolicyRequestFile> {
+public class MemberCountValidator implements Validator<CustomerRequestDetail, CustomerRequestFile> {
 
-    public String doValidate(PolicyRequestDetail detail, PolicyRequestFile file, ValidatorChain chain) throws BusinessValidationException {
+    public String doValidate(CustomerRequestDetail detail, CustomerRequestFile file, ValidatorChain chain) throws BusinessValidationException {
         if (!isValidMemberCount(detail.getMemberCount())) {
             return "An invalid User count was provided. Accepted Value(s): 0 - 10.";
         }

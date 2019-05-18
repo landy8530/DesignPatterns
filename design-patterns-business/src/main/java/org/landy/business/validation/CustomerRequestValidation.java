@@ -1,7 +1,7 @@
 package org.landy.business.validation;
 
 import org.apache.commons.lang.StringUtils;
-import org.landy.business.domain.detail.PolicyRequestDetail;
+import org.landy.business.domain.detail.CustomerRequestDetail;
 import org.landy.business.domain.file.RequestFile;
 import org.landy.business.enums.WorkflowEnum;
 import org.landy.constants.Constants;
@@ -15,9 +15,9 @@ import java.util.List;
  * @author landyl
  * @create 2:31 PM 05/07/2018
  */
-@Component(value = PolicyRequestValidation.BEAN_NAME)
-public class PolicyRequestValidation extends AbstractRequestValidation {
-    public static final String BEAN_NAME = "policyRequestValidation";
+@Component(value = CustomerRequestValidation.BEAN_NAME)
+public class CustomerRequestValidation extends AbstractRequestValidation {
+    public static final String BEAN_NAME = "customerRequestValidation";
 
     @Override
     protected String validateFileName(String fileName) {
@@ -53,7 +53,7 @@ public class PolicyRequestValidation extends AbstractRequestValidation {
 
     @Override
     protected StringBuilder validateFileDetails(StringBuilder errMsg, RequestFile requestFile) {
-        List<PolicyRequestDetail> requestPolicyDetails = requestFile.getRequestDetails();
+        List<CustomerRequestDetail> requestPolicyDetails = requestFile.getRequestDetails();
         if (requestPolicyDetails == null || requestPolicyDetails.size() == 0) {
             return errMsg.append(" No update details were provided on the request.");
         }
@@ -88,7 +88,7 @@ public class PolicyRequestValidation extends AbstractRequestValidation {
         return BEAN_NAME;
     }
 
-    private String validatePolicyDetail(PolicyRequestDetail requestDetail,RequestFile requestFile) {
+    private String validatePolicyDetail(CustomerRequestDetail requestDetail, RequestFile requestFile) {
         return super.validateDetail(requestDetail,requestFile);
     }
 
