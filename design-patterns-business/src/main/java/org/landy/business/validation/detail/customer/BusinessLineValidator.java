@@ -1,7 +1,7 @@
-package org.landy.business.validation.detail.policy;
+package org.landy.business.validation.detail.customer;
 
-import org.landy.business.domain.detail.PolicyRequestDetail;
-import org.landy.business.domain.file.PolicyRequestFile;
+import org.landy.business.domain.detail.CustomerRequestDetail;
+import org.landy.business.domain.file.CustomerRequestFile;
 import org.landy.business.validation.Validator;
 import org.landy.business.validation.ValidatorChain;
 import org.landy.business.validation.ValidatorConstants;
@@ -13,10 +13,10 @@ import org.springframework.stereotype.Component;
  * @author landyl
  * @create 2:57 PM 05/09/2018
  */
-@Component(ValidatorConstants.BEAN_NAME_POLICY_BUSINESS_LINE)
-public class BusinessLineValidator implements Validator<PolicyRequestDetail,PolicyRequestFile> {
+@Component(ValidatorConstants.BEAN_NAME_CUSTOMER_BUSINESS_LINE)
+public class BusinessLineValidator implements Validator<CustomerRequestDetail, CustomerRequestFile> {
 
-    public String doValidate(PolicyRequestDetail detail, PolicyRequestFile file, ValidatorChain chain) throws BusinessValidationException {
+    public String doValidate(CustomerRequestDetail detail, CustomerRequestFile file, ValidatorChain chain) throws BusinessValidationException {
         String result = validateBusinessLineLogic(detail);
 
         if(!Constants.VALID.equals(result)){
@@ -26,7 +26,7 @@ public class BusinessLineValidator implements Validator<PolicyRequestDetail,Poli
         return chain.doValidate(detail,file);
     }
 
-    private String validateBusinessLineLogic(PolicyRequestDetail detail) {
+    private String validateBusinessLineLogic(CustomerRequestDetail detail) {
         if(detail.getBusinessLine() == null || detail.getBusinessLine().trim().isEmpty()){
             return "BusinessLine is required!";
         }

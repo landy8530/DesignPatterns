@@ -1,6 +1,7 @@
 package org.landy.business.validation.handler;
 
 import org.landy.business.enums.WorkflowEnum;
+import org.landy.business.validation.util.ValidatorUtil;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -10,9 +11,9 @@ import java.util.Set;
  * @author landyl
  * @create 11:16 AM 05/09/2018
  */
-@Component(PolicyValidatorHandler.BEAN_NAME)
-public class PolicyValidatorHandler extends AbstractValidatorHandler {
-    public static final String BEAN_NAME = "policyValidatorHandler";
+@Component(CustomerValidatorHandler.BEAN_NAME)
+public class CustomerValidatorHandler extends AbstractValidatorHandler {
+    public static final String BEAN_NAME = "customerValidatorHandler";
 
     @Override
     protected WorkflowEnum getWorkflowId() {
@@ -23,14 +24,24 @@ public class PolicyValidatorHandler extends AbstractValidatorHandler {
     protected Set<String> getBasePackages() {
         Set<String> packages = new HashSet<>();
         packages.add("org.landy.business.validation.detail.customer");
-        packages.add("org.landy.business.validation.detail.component");
+        packages.add("org.landy.business.validation.detail.common");
         return packages;
     }
 
     @Override
     protected Set<Class> excludeClasses() {
         Set<Class> classes = new HashSet<>();
+        classes.addAll(excludeConstrainedColumnValidatorClasses());
         return classes;
+    }
+
+    /**
+     * 需要排除的约束字段校验器
+     * @see org.landy.business.validation.detail.customer.ConstrainedColumnValidator
+     * @return
+     */
+    private Set<Class> excludeConstrainedColumnValidatorClasses() {
+        return ValidatorUtil.constrainedColumnValidatorClasses();
     }
 
     @Override

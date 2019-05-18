@@ -13,14 +13,15 @@ import java.util.List;
  */
 public class XHFRequestFile extends RequestFile<XHFRequestDetail> {
     public static final String[] xhfDetailHeaders = {
-            "ROW_NUMBER", "SYSTEM_SOURCE", "SYSTEM_SOURCE_ID","MEMBER_NUMBER"
+            "ROW_NUMBER", "SYSTEM_SOURCE", "SYSTEM_SOURCE_ID","MEMBER_NUMBER",
+            "IS_ACTIVE", "IS_REVERSED","NOT_CANCELLED","GENDER"
     };
 
-    private List<XHFRequestDetail> requestBOBDetails;
+    private List<XHFRequestDetail> requestXHFDetails;
 
     @Override
     public List<XHFRequestDetail> getRequestDetails() {
-        return getRequestBOBDetails();
+        return getRequestXHFDetails();
     }
 
     @Override
@@ -33,21 +34,21 @@ public class XHFRequestFile extends RequestFile<XHFRequestDetail> {
         return WorkflowEnum.XHF;
     }
 
-    private List<XHFRequestDetail> getRequestBOBDetails() {
-        if (requestBOBDetails == null) {
+    private List<XHFRequestDetail> getRequestXHFDetails() {
+        if (requestXHFDetails == null) {
             List<String> detailLines = getDetailLines();
 
             if (detailLines == null) return null;
 
             XHFRequestDetail detail;
-            requestBOBDetails = new ArrayList<>();
+            requestXHFDetails = new ArrayList<>();
             for (String detailLine : detailLines) {
                 detail = parseDetailLinesToRequestBOBDetail(detailLine);
-                requestBOBDetails.add(detail);
+                requestXHFDetails.add(detail);
             }
         }
 
-        return requestBOBDetails;
+        return requestXHFDetails;
     }
 
     private XHFRequestDetail parseDetailLinesToRequestBOBDetail(String detailLine) {

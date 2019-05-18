@@ -22,4 +22,12 @@ public class Constants {
     public static final String DELIMITER_PIPE = "\\|";
 
     public static final int UPDATE_STATUS_VALID_UPDATE = 0;
+
+    public static final int UNPROCESSED = 0;
+    public static final int INVALID_IS_ACTIVE = 1;
+    public static final int INVALID_IS_REVERSED = 2;
+    public static final int INVALID_NOT_CANCELLED = 3;
+    public static final int INVALID_GENDER = 4;
+
+    public static final String EMPTY_STRING = "";
 }
