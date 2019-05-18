@@ -1,4 +1,4 @@
-package org.landy.business.validation.detail.policy;
+package org.landy.business.validation.detail.customer;
 
 import org.landy.business.domain.detail.PolicyRequestDetail;
 import org.landy.business.domain.file.PolicyRequestFile;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * @author landyl
  * @create 2:57 PM 05/09/2018
  */
-@Component(ValidatorConstants.BEAN_NAME_POLICY_BUSINESS_LINE)
+@Component(ValidatorConstants.BEAN_NAME_CUSTOMER_BUSINESS_LINE)
 public class BusinessLineValidator implements Validator<PolicyRequestDetail,PolicyRequestFile> {
 
     public String doValidate(PolicyRequestDetail detail, PolicyRequestFile file, ValidatorChain chain) throws BusinessValidationException {

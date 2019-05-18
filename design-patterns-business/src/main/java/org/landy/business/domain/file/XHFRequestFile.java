@@ -14,6 +14,7 @@ import java.util.List;
 public class XHFRequestFile extends RequestFile<XHFRequestDetail> {
     public static final String[] xhfDetailHeaders = {
             "ROW_NUMBER", "SYSTEM_SOURCE", "SYSTEM_SOURCE_ID","MEMBER_NUMBER"
+
     };
 
     private List<XHFRequestDetail> requestBOBDetails;

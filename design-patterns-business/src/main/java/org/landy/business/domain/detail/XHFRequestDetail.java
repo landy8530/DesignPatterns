@@ -9,7 +9,6 @@ public class XHFRequestDetail extends RequestDetail {
     private String carrierName;
     private String carrierState;
     private String carrierProductLine;
-    private String gender;
     private String birthDate;
     private String policyNumber;
     private String monthlyPremium;
@@ -89,15 +88,6 @@ public class XHFRequestDetail extends RequestDetail {
 
     public void setCarrierProductLine(String carrierProductLine) {
         this.carrierProductLine = carrierProductLine;
-    }
-
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
     }
 
     public String getBirthDate() {

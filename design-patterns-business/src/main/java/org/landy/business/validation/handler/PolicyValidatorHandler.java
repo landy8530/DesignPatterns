@@ -1,6 +1,7 @@
 package org.landy.business.validation.handler;
 
 import org.landy.business.enums.WorkflowEnum;
+import org.landy.business.validation.util.ValidatorUtil;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -30,7 +31,17 @@ public class PolicyValidatorHandler extends AbstractValidatorHandler {
     @Override
     protected Set<Class> excludeClasses() {
         Set<Class> classes = new HashSet<>();
+        classes.addAll(excludeConstrainedColumnValidatorClasses());
         return classes;
+    }
+
+    /**
+     * 需要排除的约束字段校验器
+     * @see org.landy.business.validation.detail.customer.ConstrainedColumnValidator
+     * @return
+     */
+    private Set<Class> excludeConstrainedColumnValidatorClasses() {
+        return ValidatorUtil.constrainedColumnValidatorClasses();
     }
 
     @Override

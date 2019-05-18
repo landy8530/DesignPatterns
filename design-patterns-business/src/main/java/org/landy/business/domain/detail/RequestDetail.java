@@ -1,5 +1,7 @@
 package org.landy.business.domain.detail;
 
+import org.landy.business.validation.ValidationResult;
+
 /**
  * @author landyl
  * @create 10:34 AM 05/08/2018
@@ -28,6 +30,24 @@ public class RequestDetail {
     private String city;
     private String state;
     private String zipCode;
+
+    private String gender;
+    private String isDelinquent;
+    private String isActive;
+    private String isReversed;
+    private String notCancelled;
+
+    private ValidationResult validationResult;
+
+    public ValidationResult bindValidationResult(int resultId,String resultMsg) {
+        this.validationResult = new ValidationResult(resultId,resultMsg);
+        return this.validationResult;
+    }
+
+    public ValidationResult bindValidationResult(int resultId) {
+        this.validationResult = new ValidationResult(resultId);
+        return this.validationResult;
+    }
 
     public String getRowNumber() {
         return rowNumber;
@@ -203,5 +223,53 @@ public class RequestDetail {
 
     public void setFrequencyToDebit(String frequencyToDebit) {
         this.frequencyToDebit = frequencyToDebit;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getIsDelinquent() {
+        return isDelinquent;
+    }
+
+    public void setIsDelinquent(String isDelinquent) {
+        this.isDelinquent = isDelinquent;
+    }
+
+    public String getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(String isActive) {
+        this.isActive = isActive;
+    }
+
+    public String getIsReversed() {
+        return isReversed;
+    }
+
+    public void setIsReversed(String isReversed) {
+        this.isReversed = isReversed;
+    }
+
+    public String getNotCancelled() {
+        return notCancelled;
+    }
+
+    public void setNotCancelled(String notCancelled) {
+        this.notCancelled = notCancelled;
+    }
+
+    public ValidationResult getValidationResult() {
+        return validationResult;
+    }
+
+    public void setValidationResult(ValidationResult validationResult) {
+        this.validationResult = validationResult;
     }
 }

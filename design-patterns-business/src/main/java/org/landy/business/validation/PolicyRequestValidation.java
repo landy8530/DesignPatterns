@@ -27,7 +27,7 @@ public class PolicyRequestValidation extends AbstractRequestValidation {
         String[] nameParts = fileName.split(Constants.DELIMITER_UNDERSCORE);
         if (nameParts.length != 5) return generateFileNameResult();
 
-        //xhf_policy_yyyyMMdd_HHmmss_count.txt
+        //xhf_customer_yyyyMMdd_HHmmss_count.txt
         if (!"xhf".equals(nameParts[index++])) return generateFileNameResult();
         if (!"customer".equals(nameParts[index++])) return generateFileNameResult();
 
@@ -80,7 +80,7 @@ public class PolicyRequestValidation extends AbstractRequestValidation {
 
     @Override
     protected String accessFileNameFormat() {
-        return "xhf_policy_yyyyMMdd_HHmmss_count.txt";
+        return "xhf_customer_yyyyMMdd_HHmmss_count.txt";
     }
 
     @Override

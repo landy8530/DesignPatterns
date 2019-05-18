@@ -131,7 +131,7 @@ public abstract class AbstractRequestValidation {
     protected abstract WorkflowEnum accessWorkflow();
 
     /**
-     * return the current file name's format ,such as: xhf_policy_yyyyMMdd_HHmmss_count.txt
+     * return the current file name's format ,such as: xhf_customer_yyyyMMdd_HHmmss_count.txt
      * @return
      */
     protected abstract String accessFileNameFormat();

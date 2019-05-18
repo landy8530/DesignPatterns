@@ -29,9 +29,9 @@ public class RequestValidatorTest extends SpringTestBase {
     public void testValidation() throws IOException {
         String filePath = FileUtil.getFilePathByClassPath("/org/landy/business");
 //        String fileName = "test_20180517_102637_324.txt";
-        String fileName = "org.landy/business/xhf_integration_20180716_101705_2.txt";
+        String fileName = "xhf_customer_20190518_101705_2.txt";
         RequestFile requestFile;
-        if (fileName.startsWith("xhf_policy_")) {
+        if (fileName.startsWith("xhf_customer_")) {
             requestFile = new PolicyRequestFile();
         } else {
             requestFile = new XHFRequestFile();

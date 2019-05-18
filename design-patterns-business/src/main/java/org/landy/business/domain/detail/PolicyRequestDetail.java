@@ -14,13 +14,9 @@ public class PolicyRequestDetail extends RequestDetail {
 
     private String monthlyPremium;
     private String rateTier;
-    private String raf;	// SMB only
-    private String notCancelled;
-    private String isDelinquent;
+    private String raf;
     private String delinquencyNote;
     private String memberCount;
-    private String isActive;
-    private String isReversed;
     private String isMasterPolicy;
     private String category;
     private String subscriberCount;
@@ -126,22 +122,6 @@ public class PolicyRequestDetail extends RequestDetail {
 		this.raf = raf;
 	}
 
-	public String getNotCancelled() {
-        return notCancelled;
-    }
-
-    public void setNotCancelled(String notCancelled) {
-        this.notCancelled = notCancelled;
-    }
-
-    public String getIsDelinquent() {
-        return isDelinquent;
-    }
-
-    public void setIsDelinquent(String isDelinquent) {
-        this.isDelinquent = isDelinquent;
-    }
-
     public String getDelinquencyNote() {
         return delinquencyNote;
     }
@@ -156,22 +136,6 @@ public class PolicyRequestDetail extends RequestDetail {
 
     public void setMemberCount(String memberCount) {
         this.memberCount = memberCount;
-    }
-
-    public String getIsActive() {
-        return isActive;
-    }
-
-    public void setIsActive(String isActive) {
-        this.isActive = isActive;
-    }
-
-    public String getIsReversed() {
-        return isReversed;
-    }
-
-    public void setIsReversed(String isReversed) {
-        this.isReversed = isReversed;
     }
 
     public String getIsMasterPolicy() {

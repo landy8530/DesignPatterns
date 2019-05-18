@@ -14,17 +14,8 @@ import java.util.List;
 public class PolicyRequestFile extends RequestFile<PolicyRequestDetail> {
 
     public static final String[] policyDetailHeaders = {
-            "ROW_NUMBER", "PARENT_CARRIER_ID", "APPLICATION_ID", "MEMBER_NUMBER",
-            "POLICY_ID", "PRODUCT_LINE", "PLAN_NAME", "CATEGORY_CLASS_ID",
-            "BIRTH_DATE", "FULL_NAME", "FIRST_NAME", "MIDDLE_NAME",
-            "LAST_NAME", "EFFECTIVE_START_DATE", "CANCELLATION_DATE", "REVENUE_IMPACT_DATE",
-            "CARRIER_EFFECTIVE_DATE", "CARRIER_ID", "PLAN_ID", "RIDER_ID",
-            "POLICY_NUMBER", "FREQUENCY_TO_DEBIT", "MONTHLY_PREMIUM", "RATE_TIER",
-            "NOT_CANCELLED", "IS_DELINQUENT", "DELINQUENCY_NOTE", "MEMBER_COUNT",
-            "STATUS_CODE", "STATUS_DATE", "IS_ACTIVE", "IS_REVERSED",
-            "IS_MASTER_POLICY", "CATEGORY", "SUBSCRIBER_COUNT", "EMAIL",
-            "ADDRESS_TYPE", "ADDRESS_LINE_1", "ADDRESS_LINE_2", "ADDRESS_LINE_3",
-            "CITY", "STATE", "ZIP_CODE", "COUNTY", "BUSINESS_LINE", "GROUP_NAME"
+            "ROW_NUMBER", "SYSTEM_SOURCE", "SYSTEM_SOURCE_ID", "MEMBER_NUMBER",
+            "IS_ACTIVE", "IS_REVERSED","NOT_CANCELLED","GENDER","BUSINESS_LINE","MEMBER_COUNT"
     };
 
     private List<PolicyRequestDetail> requestPolicyDetails;
