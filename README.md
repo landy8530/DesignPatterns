@@ -33,3 +33,4 @@
 * [1 门面+模版方法+责任链+策略](https://github.com/landy8530/DesignPatterns/wiki/1.-%E9%97%A8%E9%9D%A2-%E6%A8%A1%E7%89%88%E6%96%B9%E6%B3%95-%E8%B4%A3%E4%BB%BB%E9%93%BE-%E7%AD%96%E7%95%A5)
 * [2 门面+模版方法+责任链+策略+工厂方法](https://github.com/landy8530/DesignPatterns/wiki/2.-%E9%97%A8%E9%9D%A2-%E6%A8%A1%E7%89%88%E6%96%B9%E6%B3%95-%E8%B4%A3%E4%BB%BB%E9%93%BE-%E7%AD%96%E7%95%A5-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95)
 * [3 动态代理+Spring AOP](https://github.com/landy8530/DesignPatterns/wiki/3.-%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86-Spring-AOP)
+* [4 责任链模式进阶](https://github.com/landy8530/DesignPatterns/wiki/4-%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F%E8%BF%9B%E9%98%B6)
