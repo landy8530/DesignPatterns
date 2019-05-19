@@ -15,17 +15,18 @@
 
 # 设计模式简介
 
-* 1 [单例模式](https://github.com/landy8530/DesignPatterns/wiki/1.-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F)
-* 2 [责任链模式](https://github.com/landy8530/DesignPatterns/wiki/2.-%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F)
-* 3 [策略模式](https://github.com/landy8530/DesignPatterns/wiki/3.-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F)
-* 4 [模板方法模式](https://github.com/landy8530/DesignPatterns/wiki/4.-%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F)
-* 5 [工厂方法模式](https://github.com/landy8530/DesignPatterns/wiki/5.-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F)
-* 6 [抽象工厂模式](https://github.com/landy8530/DesignPatterns/wiki/6.-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F)
-* 7 [建造者模式](https://github.com/landy8530/DesignPatterns/wiki/7.-%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F)
-* 8 [代理模式](https://github.com/landy8530/DesignPatterns/wiki/8.-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F)
-* 9 [装饰模式](https://github.com/landy8530/DesignPatterns/wiki/9.-%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F)
-* 10 [原型模式](https://github.com/landy8530/DesignPatterns/wiki/10.-%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F)
-* 11 [委派模式](https://github.com/landy8530/DesignPatterns/wiki/11.-%E5%A7%94%E6%B4%BE%E6%A8%A1%E5%BC%8F)
+* [1 单例模式](https://github.com/landy8530/DesignPatterns/wiki/1.-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F)
+* [2 责任链模式](https://github.com/landy8530/DesignPatterns/wiki/2.-%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F)
+* [3 策略模式](https://github.com/landy8530/DesignPatterns/wiki/3.-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F)
+* [4 模板方法模式](https://github.com/landy8530/DesignPatterns/wiki/4.-%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F)
+* [5 工厂方法模式](https://github.com/landy8530/DesignPatterns/wiki/5.-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F)
+* [6 抽象工厂模式](https://github.com/landy8530/DesignPatterns/wiki/6.-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F)
+* [7 建造者模式](https://github.com/landy8530/DesignPatterns/wiki/7.-%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F)
+* [8 代理模式](https://github.com/landy8530/DesignPatterns/wiki/8.-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F)
+* [9 装饰模式](https://github.com/landy8530/DesignPatterns/wiki/9.-%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F)
+* [10 原型模式](https://github.com/landy8530/DesignPatterns/wiki/10.-%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F)
+* [11 委派模式](https://github.com/landy8530/DesignPatterns/wiki/11.-%E5%A7%94%E6%B4%BE%E6%A8%A1%E5%BC%8F)
+* [12 适配器模式](https://github.com/landy8530/DesignPatterns/wiki/12-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F)
 
 # 设计模式综合运用
 
