@@ -1,10 +1,12 @@
 package org.landy.business.validation.detail.customer;
 
 import org.landy.business.domain.detail.CustomerRequestDetail;
-import org.landy.business.domain.file.CustomerRequestFile;
+import org.landy.business.domain.detail.RequestDetail;
+import org.landy.business.domain.file.RequestFile;
 import org.landy.business.validation.Validator;
 import org.landy.business.validation.ValidatorChain;
 import org.landy.business.validation.ValidatorConstants;
+import org.landy.business.validation.adapter.ValidatorAdapter;
 import org.landy.business.validation.handler.CustomerValidatorHandler;
 import org.landy.business.validation.util.ValidatorUtil;
 import org.landy.exception.BusinessValidationException;
@@ -24,14 +26,14 @@ import java.util.Set;
  * @create 14:03 05/18/2019
  */
 @Component(ValidatorConstants.BEAN_NAME_CONSTRAINED_COLUMN)
-public class ConstrainedColumnValidator implements Validator<CustomerRequestDetail, CustomerRequestFile> {
+public class ConstrainedColumnValidator extends ValidatorAdapter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ConstrainedColumnValidator.class);
     //约束字段校验器集合
     private static final Map<String, Class> CONSTRAINED_COLUMN_VALIDATOR_MAP = ValidatorUtil.constrainedColumnValidatorClassMap();
 
     @Override
-    public String doValidate(CustomerRequestDetail detail, CustomerRequestFile file, ValidatorChain chain) throws BusinessValidationException {
+    public String doValidate(RequestDetail detail, RequestFile file, ValidatorChain chain) throws BusinessValidationException {
         Set<String> beanNameSet = CONSTRAINED_COLUMN_VALIDATOR_MAP.keySet();
 
         for (String beanName : beanNameSet) {
@@ -45,7 +47,11 @@ public class ConstrainedColumnValidator implements Validator<CustomerRequestDeta
                     if (resultId == validationResultId) {
                         String columnName = ValidatorUtil.getConstrainedColumnName(beanName);
                         LOGGER.warn("Invalid column [{}], we simply set the correspond value is null", columnName);
-                        ValidatorUtil.setNullIfInvalid(detail, columnName);
+                        if(detail instanceof CustomerRequestDetail) {
+                            CustomerRequestDetail crd = (CustomerRequestDetail) detail;
+                            ValidatorUtil.setNullIfInvalid(crd, columnName);
+                        }
+
                     }
                 }
             }

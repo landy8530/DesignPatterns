@@ -20,17 +20,7 @@ public interface Validator<R extends RequestDetail,F extends RequestFile> {
      * @return
      * @throws BusinessValidationException
      */
-    default String doValidate(R detail, F file, ValidatorChain chain) throws BusinessValidationException {
-        boolean isValid = this.doValidate(detail, file);
-        //校验失败了，就直接返回
-        if(!isValid) {
-            if(detail.getValidationResult() != null) {
-                return detail.getValidationResult().getResultMsg();
-            }
-        }
-        //否则往责任链中下一个校验器进行处理
-        return chain.doValidate(detail, file);
-    }
+    String doValidate(R detail, F file, ValidatorChain chain) throws BusinessValidationException ;
 
     /**
      * 不需要责任链的时候，则可以直接调用此方法的实现即可
@@ -38,6 +28,6 @@ public interface Validator<R extends RequestDetail,F extends RequestFile> {
      * @return
      * @throws BusinessValidationException
      */
-    default boolean doValidate(R detail, F file) throws BusinessValidationException { return true; }
+    boolean doValidate(R detail, F file) throws BusinessValidationException ;
 
 }

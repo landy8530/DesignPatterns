@@ -1,10 +1,11 @@
 package org.landy.business.validation.detail.customer;
 
 import org.landy.business.domain.detail.CustomerRequestDetail;
-import org.landy.business.domain.file.CustomerRequestFile;
-import org.landy.business.validation.Validator;
+import org.landy.business.domain.detail.RequestDetail;
+import org.landy.business.domain.file.RequestFile;
 import org.landy.business.validation.ValidatorChain;
 import org.landy.business.validation.ValidatorConstants;
+import org.landy.business.validation.adapter.ValidatorAdapter;
 import org.landy.constants.Constants;
 import org.landy.exception.BusinessValidationException;
 import org.springframework.stereotype.Component;
@@ -14,15 +15,16 @@ import org.springframework.stereotype.Component;
  * @create 2:57 PM 05/09/2018
  */
 @Component(ValidatorConstants.BEAN_NAME_CUSTOMER_BUSINESS_LINE)
-public class BusinessLineValidator implements Validator<CustomerRequestDetail, CustomerRequestFile> {
+public class BusinessLineValidator extends ValidatorAdapter {
 
-    public String doValidate(CustomerRequestDetail detail, CustomerRequestFile file, ValidatorChain chain) throws BusinessValidationException {
-        String result = validateBusinessLineLogic(detail);
-
-        if(!Constants.VALID.equals(result)){
-            return result;
+    public String doValidate(RequestDetail detail, RequestFile file, ValidatorChain chain) throws BusinessValidationException {
+        if(detail instanceof CustomerRequestDetail) {
+            CustomerRequestDetail crd = (CustomerRequestDetail)detail;
+            String result = validateBusinessLineLogic(crd);
+            if(!Constants.VALID.equals(result)){
+                return result;
+            }
         }
-
         return chain.doValidate(detail,file);
     }
 

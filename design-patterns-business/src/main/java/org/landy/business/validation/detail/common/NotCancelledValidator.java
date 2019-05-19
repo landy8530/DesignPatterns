@@ -3,8 +3,8 @@ package org.landy.business.validation.detail.common;
 import org.apache.commons.lang.StringUtils;
 import org.landy.business.domain.detail.RequestDetail;
 import org.landy.business.domain.file.RequestFile;
-import org.landy.business.validation.Validator;
 import org.landy.business.validation.ValidatorConstants;
+import org.landy.business.validation.adapter.ValidatorAdapter;
 import org.landy.constants.Constants;
 import org.landy.exception.BusinessValidationException;
 import org.springframework.stereotype.Component;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  * @create 2:57 PM 05/09/2018
  */
 @Component(ValidatorConstants.BEAN_NAME_CUSTOMER_REVENUE_NOT_CANCELLED)
-public class NotCancelledValidator implements Validator<RequestDetail, RequestFile> {
+public class NotCancelledValidator extends ValidatorAdapter {
 
     @Override
     public boolean doValidate(RequestDetail detail, RequestFile file) throws BusinessValidationException {
