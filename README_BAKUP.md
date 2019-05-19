@@ -1613,7 +1613,7 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 
 ### 4.1 责任链模式现存缺点
 
-
+由于责任链大多数都是不纯的情况，本案例中，只要校验失败就直接返回，不继续处理接下去责任链中的其他校验逻辑了，故而出现如果某个部分逻辑是要由多个校验器组成一个整理的校验逻辑的话，则此责任链模式则显现出了它的不足之处了。（责任链模式的具体运用以及原理请参见wiki [2 责任链模式](https://github.com/landy8530/DesignPatterns/wiki/2.-%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F)）
 
 ### 4.2 改进方式
 
@@ -1657,6 +1657,175 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 1. 一种就是按照原来的文件上传需求，上传过程中需要校验操作，只要校验失败了，就直接返回失败信息，整个文件都不需要做处理了。（参见第一节内容 [1 门面+模版方法+责任链+策略](https://github.com/landy8530/DesignPatterns/wiki/1.-%E9%97%A8%E9%9D%A2-%E6%A8%A1%E7%89%88%E6%96%B9%E6%B3%95-%E8%B4%A3%E4%BB%BB%E9%93%BE-%E7%AD%96%E7%95%A5)）
 2. 另一种就是校验的逻辑都一样，但是如果校验失败的情况，需要继续往下执行，记录一下失败id即可，即需要把失败的记录也保存到数据库中，比如约束字段不符合约束规则的情况，则把此字段置空，然后继续执行其他校验器逻辑即可。（本节需要讨论的问题）
 
-#### 4.3.2 实现细节
+#### 4.3.2 实现方案
+
+根据4.2节的改进方式可以知道，我们有两种方式改进以上逻辑。
+
+##### 4.3.2.1 采用适配器模式
+
+> 代码参见2.1版本的，地址为：<https://github.com/landy8530/DesignPatterns/tree/2.1>
+
+若采用适配器模式，此处我们会采用接口适配器模式。
+
+接口需要多增加一个不用链式调用的校验方法，定义如下，
+
+```java
+/**
+ * 业务校验统一接口,增加了接口的默认方法实现，这样可以更加方便且自由选择实现接口的哪些方法。
+ * @author landyl
+ * @create 10:32 AM 05/09/2018
+ * @version 2.0
+ * @since 1.0
+ */
+public interface Validator<R extends RequestDetail,F extends RequestFile> {
+
+    /**
+     * 需要引入责任链的时候，则采用此方法
+     * @param detail
+     * @param chain
+     * @return
+     * @throws BusinessValidationException
+     */
+    String doValidate(R detail, F file, ValidatorChain chain) throws BusinessValidationException;
+
+    /**
+     * 不需要责任链的时候，则可以直接调用此方法的实现即可
+     * @param detail
+     * @return
+     * @throws BusinessValidationException
+     */
+    boolean doValidate(R detail, F file) throws BusinessValidationException;
+}
+```
+
+适配器类定义如下抽象类，
+
+```java
+/**
+ * @author: landy
+ * @date: 2019/5/19 14:48
+ * @description:
+ */
+public abstract class ValidatorAdapter implements Validator<RequestDetail, RequestFile>  {
+
+    public String doValidate(RequestDetail detail, RequestFile file, ValidatorChain chain) throws BusinessValidationException {
+        boolean isValid = this.doValidate(detail, file);
+        //校验失败了，就直接返回
+        if(!isValid) {
+            if(detail.getValidationResult() != null) {
+                return detail.getValidationResult().getResultMsg();
+            }
+        }
+        //否则往责任链中下一个校验器进行处理
+        return chain.doValidate(detail, file);
+    }
+
+    @Override
+    public boolean doValidate(RequestDetail detail, RequestFile file) throws BusinessValidationException {
+        return true;
+    }
+}
+```
+
+如此一来，因为增加了原有接口中的方法，则需要在每个实现类中都增加一个实现方法，虽然有以上的适配器类，但是也要把之前实现接口改为继承该适配器类，即 `ValidatorAdapter` 类。比如，
+
+```java
+/**
+ * @author landyl
+ * @create 2:57 PM 05/09/2018
+ */
+@Component(ValidatorConstants.BEAN_NAME_CUSTOMER_IS_ACTIVE)
+public class IsActiveValidator extends ValidatorAdapter {
+
+    @Override
+    public boolean doValidate(RequestDetail detail, RequestFile file) throws BusinessValidationException {
+        if (StringUtils.isNotEmpty(detail.getIsActive())
+                && !"0".equals(detail.getIsActive())
+                && !"1".equals(detail.getIsActive())) {
+            String result = "An invalid Is Active setting was provided. Accepted Value(s): 0, 1 (0 = No; 1 = Yes).";
+            detail.bindValidationResult(Constants.INVALID_IS_ACTIVE,result);
+            return false;
+        }
+        return true;
+    }
+}
+```
+
+而且，因为适配器类中的参数都是`RequestDetail` 和 `RequestFile`类，故而子类可能需要做强制转换操作，如：
+
+```java
+@Component(ValidatorConstants.BEAN_NAME_CUSTOMER_BUSINESS_LINE)
+public class BusinessLineValidator extends ValidatorAdapter {
+
+    public String doValidate(RequestDetail detail, RequestFile file, ValidatorChain chain) throws BusinessValidationException {
+        if(detail instanceof CustomerRequestDetail) {
+            CustomerRequestDetail crd = (CustomerRequestDetail)detail;
+            String result = validateBusinessLineLogic(crd);
+            if(!Constants.VALID.equals(result)){
+                return result;
+            }
+        }
+        return chain.doValidate(detail,file);
+    }
+	...
+
+}
+```
+
+局限性比较多。
+
+##### 4.3.2.2 采用接口默认方法
+
+> 代码参见2.0版本，地址为：<https://github.com/landy8530/DesignPatterns/tree/2.0> ，后续也会merge到master版本。
+
+接口定义如下，采用默认方法实现，
+
+```java
+/**
+ * 业务校验统一接口,增加了接口的默认方法实现，这样可以更加方便且自由选择实现接口的哪些方法。
+ * @author landyl
+ * @create 10:32 AM 05/09/2018
+ * @version 2.0
+ * @since 1.0
+ */
+public interface Validator<R extends RequestDetail,F extends RequestFile> {
+
+    /**
+     * 需要引入责任链的时候，则采用此方法
+     * @param detail
+     * @param chain
+     * @return
+     * @throws BusinessValidationException
+     */
+    default String doValidate(R detail, F file, ValidatorChain chain) throws BusinessValidationException {
+        boolean isValid = this.doValidate(detail, file);
+        //校验失败了，就直接返回
+        if(!isValid) {
+            if(detail.getValidationResult() != null) {
+                return detail.getValidationResult().getResultMsg();
+            }
+        }
+        //否则往责任链中下一个校验器进行处理
+        return chain.doValidate(detail, file);
+    }
+
+    /**
+     * 不需要责任链的时候，则可以直接调用此方法的实现即可
+     * @param detail
+     * @return
+     * @throws BusinessValidationException
+     */
+    default boolean doValidate(R detail, F file) throws BusinessValidationException { return true; }
+
+}
+```
+
+由此可见，其实此处的默认方法，就是上节中的适配器类的实现方式而已，而且对于后续的实现类而言，无须变动（针对不需要改动业务逻辑的类而言）。即使针对需要变动业务逻辑的类，也只是改动部分而已，而且不需要类型强制转换操作。避免了不必要的异常出现。
+
+##### 4.3.2.3 方案对比
+
+经过以上代码实现可以发现，默认接口实现有其非常明显的优势，即拥抱变化，扩展已有接口，向后兼容。
 
 #### 4.3.3 逻辑测试
+
+具体的测试代码可以参见相应版本的github单元测试代码即可。
