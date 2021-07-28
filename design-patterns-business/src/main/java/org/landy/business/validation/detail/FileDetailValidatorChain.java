@@ -7,6 +7,7 @@ import org.landy.business.validation.Validator;
 import org.landy.business.validation.ValidatorChain;
 import org.landy.constants.Constants;
 import org.landy.exception.BusinessValidationException;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import java.util.Map;
  * @create 10:41 AM 05/09/2018
  */
 @Component
+@Scope("prototype")
 public class FileDetailValidatorChain implements ValidatorChain {
 
     Map<WorkflowEnum,List<Validator>> validatorMap = new HashMap<>();
