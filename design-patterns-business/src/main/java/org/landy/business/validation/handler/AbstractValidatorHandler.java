@@ -12,7 +12,6 @@ import org.landy.utils.PackageUtil;
 import org.landy.web.utils.ApplicationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -31,9 +30,7 @@ public abstract class AbstractValidatorHandler implements ApplicationListener<Co
     private static Map<WorkflowEnum,String> validatorHandlerMap = new HashMap<>();
 
     @Autowired
-    private BeanFactory beanFactory;
-
-    FileDetailValidatorChain fileDetailValidatorChain;
+    protected FileDetailValidatorChain fileDetailValidatorChain;
 
     public AbstractValidatorHandler() {
         validatorHandlerMap.put(getWorkflowId(),accessBeanName());
@@ -94,7 +91,7 @@ public abstract class AbstractValidatorHandler implements ApplicationListener<Co
 
     private void addValidators() {
         List<Class<? extends Validator>> validators = getValidators();
-        fileDetailValidatorChain = beanFactory.getBean(FileDetailValidatorChain.class);
+
         validators.forEach((validator) -> {
             String simpleName = validator.getSimpleName();
             String beanName = simpleName.substring(0, 1).toLowerCase() + simpleName.substring(1);
