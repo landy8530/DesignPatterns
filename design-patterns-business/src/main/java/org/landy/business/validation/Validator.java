@@ -4,6 +4,8 @@ import org.landy.business.domain.detail.RequestDetail;
 import org.landy.business.domain.file.RequestFile;
 import org.landy.exception.BusinessValidationException;
 
+import java.io.Serializable;
+
 /**
  * 业务校验统一接口,增加了接口的默认方法实现，这样可以更加方便且自由选择实现接口的哪些方法。
  * @author landyl
@@ -11,7 +13,7 @@ import org.landy.exception.BusinessValidationException;
  * @version 2.0
  * @since 1.0
  */
-public interface Validator<R extends RequestDetail,F extends RequestFile> {
+public interface Validator<R extends RequestDetail,F extends RequestFile>  extends Serializable {
 
     /**
      * 需要引入责任链的时候，则采用此方法

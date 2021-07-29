@@ -8,6 +8,7 @@ import org.landy.business.enums.WorkflowEnum;
 import org.landy.business.validation.Validator;
 import org.landy.business.validation.detail.FileDetailValidatorChain;
 import org.landy.exception.BusinessValidationException;
+import org.landy.utils.BeanUtil;
 import org.landy.utils.PackageUtil;
 import org.landy.web.utils.ApplicationUtil;
 import org.slf4j.Logger;
@@ -30,7 +31,9 @@ public abstract class AbstractValidatorHandler implements ApplicationListener<Co
     private static Map<WorkflowEnum,String> validatorHandlerMap = new HashMap<>();
 
     @Autowired
-    protected FileDetailValidatorChain fileDetailValidatorChain;
+    private FileDetailValidatorChain fileDetailValidatorChain;
+
+
 
     public AbstractValidatorHandler() {
         validatorHandlerMap.put(getWorkflowId(),accessBeanName());
@@ -45,6 +48,8 @@ public abstract class AbstractValidatorHandler implements ApplicationListener<Co
     }
 
     public String validate(RequestDetail requestDetail, RequestFile requestFile) {
+        //克隆独立的校验器链
+        FileDetailValidatorChain fileDetailValidatorChain = BeanUtil.cloneByStream(this.fileDetailValidatorChain);
         //must set the current workflowId
         fileDetailValidatorChain.setWorkflowId(getWorkflowId());
         fileDetailValidatorChain.doClearValidatorIndex(getWorkflowId());
@@ -62,7 +67,7 @@ public abstract class AbstractValidatorHandler implements ApplicationListener<Co
             LOGGER.error("can not find {}'s component",beanName);
             throw new BusinessValidationException("can not find "+beanName + "'s component,current UPDATE_WORKFLOW_ID is :" + updateWorkflowId);
         }
-        return ApplicationUtil.getApplicationContext().getBean(beanName,AbstractValidatorHandler.class);
+        return ApplicationUtil.getApplicationContext().getBean(beanName, AbstractValidatorHandler.class);
     }
 
     protected void addValidator(String beanName,Class<? extends Validator> validator) {
@@ -91,7 +96,6 @@ public abstract class AbstractValidatorHandler implements ApplicationListener<Co
 
     private void addValidators() {
         List<Class<? extends Validator>> validators = getValidators();
-
         validators.forEach((validator) -> {
             String simpleName = validator.getSimpleName();
             String beanName = simpleName.substring(0, 1).toLowerCase() + simpleName.substring(1);
@@ -99,7 +103,6 @@ public abstract class AbstractValidatorHandler implements ApplicationListener<Co
             LOGGER.info("Added validator:{},spring bean name is:{}",simpleName,beanName);
 
             Validator validatorInstance = ApplicationUtil.getApplicationContext().getBean(beanName,validator);
-
             fileDetailValidatorChain.addValidator(validatorInstance,getWorkflowId());
 
         });
