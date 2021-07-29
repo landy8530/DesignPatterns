@@ -9,6 +9,7 @@ import org.landy.constants.Constants;
 import org.landy.exception.BusinessValidationException;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.Map;
  * @create 10:41 AM 05/09/2018
  */
 @Component
-public class FileDetailValidatorChain implements ValidatorChain {
+public class FileDetailValidatorChain implements ValidatorChain, Serializable {
 
     Map<WorkflowEnum,List<Validator>> validatorMap = new HashMap<>();
     Map<WorkflowEnum,Integer> validatorIndexMap = new HashMap<>();
