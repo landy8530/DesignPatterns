@@ -64,13 +64,24 @@ public class BeanUtil {
             return null;
         }
         final FastByteArrayOutputStream byteOut = new FastByteArrayOutputStream();
-        try (ObjectOutputStream out = new ObjectOutputStream(byteOut)) {
+        ObjectOutputStream out = null;
+        //noinspection TryFinallyCanBeTryWithResources
+        try {
+            out = new ObjectOutputStream(byteOut);
             out.writeObject(obj);
             out.flush();
             final ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(byteOut.toByteArray()));
             return (T) in.readObject();
         } catch (Exception e) {
             throw new RuntimeException(e);
+        } finally {
+            if (null != out) {
+                try {
+                    out.close();
+                } catch (Exception e) {
+                    // 静默关闭
+                }
+            }
         }
     }
 
